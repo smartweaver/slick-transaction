@@ -27,7 +27,7 @@ class FakeApi extends Api {
   }
 
   post(endpoint: string): Promise<any> {
-    let data = endpoint;
+    const data = endpoint;
 
     return Promise.resolve({
       data,
