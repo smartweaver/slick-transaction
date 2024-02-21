@@ -37,7 +37,7 @@ class FakeApi extends Api {
 
 class FakeTransactions extends Transactions {
   getTransactionAnchor(): Promise<string> {
-    return Promise.resolve(txId)
+    return Promise.resolve(txId);
   }
 
   sign(...args: any[]): Promise<any> {
@@ -60,7 +60,6 @@ class FakeArweave extends Arweave {
     );
   }
 }
-
 
 const fakeArweave = FakeArweave.init({});
 
@@ -112,7 +111,6 @@ describe("methods", () => {
         .signingKey(testSigningKey)
         .sign();
 
-
       if (!transaction.id) {
         transaction.id = "-";
       }
@@ -147,14 +145,13 @@ describe("methods", () => {
         .transaction()
         .attributes({
           data: "test",
-          target: "0x1337"
+          target: "0x1337",
         })
         .tags({
           Hello: "World",
         })
         .signingKey(testSigningKey)
         .sign();
-
 
       if (!transaction.id) {
         transaction.id = "-";
