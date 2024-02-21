@@ -1,0 +1,67 @@
+name: v0.x - Code Validation
+
+on:
+  pull_request:
+    branches:
+      - v0.x
+      - v0.x-staging
+  push:
+    branches:
+      - v0.x
+      - v0.x-staging
+
+jobs:
+
+  ##############################################################################
+  # CODE QUALITY
+  ##############################################################################
+
+  lint_code:
+    name: Check for lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
+
+      - name: Run Deno linter
+        run: deno lint
+
+  code_formatting:
+    name: Check code formatting
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
+
+      - name: Run Deno formatter check
+        run: deno fmt --check
+
+  ##############################################################################
+  # TESTS - UNIT
+  ##############################################################################
+
+  tests_unit:
+    name: Tests - Unit - Node
+    needs: [lint_code, code_formatting]
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [18.x, 20.x]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Deno (for `deno` command)
+        uses: denoland/setup-deno@v1
+
+      - name: Run Tests
+        run: |
+          deno task test:unit

@@ -1,0 +1,39 @@
+{
+  "lock": false,
+  "lint": {
+    "rules": {
+      "exclude": [
+        "no-explicit-any"
+      ]
+    },
+    "include": [
+      "./src",
+      "./scripts",
+      "./tests",
+      "./*.json"
+    ]
+  },
+  "fmt": {
+    "useTabs": false,
+    "lineWidth": 80,
+    "indentWidth": 2,
+    "semiColons": true,
+    "singleQuote": false,
+    "proseWrap": "preserve",
+    "include": [
+      "./bin",
+      "./src",
+      "./scripts",
+      "./tests",
+      "./*.json"
+    ]
+  },
+  "tasks": {
+    "build:libs": "deno run --allow-read --allow-write --allow-net ./scripts/doit.ts && yarn tsup src --format cjs,esm --no-splitting --dts",
+    "check:package-json-version": "deno run --allow-read ./scripts/check_package_json_version_for_release.ts",
+    "link-local": "yarn link; deno task build:libs && cd dist && yarn unlink && yarn link",
+    "publish:dry-run": "npm publish --access restricted --dry-run",
+    "publish:npm": "npm publish",
+    "test:unit": "yarn vitest"
+  }
+}

@@ -1,0 +1,17 @@
+# Directories
+.vscode/
+cache/
+dist/
+lib/
+node_modules/
+tmp/
+
+# Files
+.DS_Store
+*.log*
+*wallet.*
+logs
+# We only use yarn
+*lock.yaml
+package-lock.json
+!yarn.lock
