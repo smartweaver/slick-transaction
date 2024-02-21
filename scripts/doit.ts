@@ -16,8 +16,12 @@ function run(cb: () => void) {
  */
 function copy(files: string[]) {
   for (const file of files) {
-    console.log(`\nMoving ${file} to ./dist/${file}`);
-    Deno.copyFileSync(`${file}`, `dist/${file}`);
+    try {
+      console.log(`\nMoving ${file} to ./dist/${file}`);
+      Deno.copyFileSync(`${file}`, `dist/${file}`);
+    } catch (e) {
+      console.log(`Error copying file - target: dist/${file}`);
+    }
   }
 }
 
