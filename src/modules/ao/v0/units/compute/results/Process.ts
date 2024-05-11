@@ -1,5 +1,9 @@
 import { kvpToQueryParamsString } from "../../../utils/FetchUtils.ts";
-import { AbstractProcess, GetRequestOptions, GetResponse } from "./AbstractProcess.ts";
+import {
+  AbstractProcess,
+  GetRequestOptions,
+  GetResponse,
+} from "./AbstractProcess.ts";
 
 export class Process extends AbstractProcess {
   /**
