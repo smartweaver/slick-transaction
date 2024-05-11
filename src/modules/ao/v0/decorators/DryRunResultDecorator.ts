@@ -1,4 +1,4 @@
-import { DryRunResult } from "../../ao/v0/types/DryRunResult";
+import { DryRunResult } from "../types/DryRunResult.ts";
 
 export class DryRunResultDecorator<T extends DryRunResult> {
   readonly result: T;

@@ -1,5 +1,5 @@
-import { MessengerUnit } from "../../interfaces/MessengerUnit";
-import { Process } from "./monitor/Process";
+import { MessengerUnit } from "../../interfaces/MessengerUnit.ts";
+import { Process } from "./monitor/Process.ts";
 
 /**
  * This class is responsible for interacting with the following endpoints:

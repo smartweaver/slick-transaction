@@ -1,5 +1,5 @@
-import { Transaction } from "../../../standard/transactions/format-2/Transaction";
-import { AoConnect } from "../interfaces/AoConnect";
+import { Transaction } from "../../../standard/transactions/format-2/Transaction.ts";
+import { AoConnect } from "../interfaces/AoConnect.ts";
 
 // @ts-ignore Use of `any` is intentional
 type Constructor = new (...args: any[]) => any;
@@ -8,19 +8,31 @@ export function TransactionBuilder(Base?: Constructor) {
   const BaseClass = Base || class BaseBuilder {};
 
   return class Builder extends BaseClass {
-    protected data_item_signer: any;
-    protected aoconnect: AoConnect;
+    #aoconnect: AoConnect;
+    #data_item_signer: any;
 
     /**
      * A transaction builder to help build this message's fields (e.g., data,
      * tags, etc.).
      */
-    protected tx_builder = Transaction.builder();
+    #tx_builder = Transaction.builder();
+
+    get aoconnect() {
+      return this.#aoconnect;
+    }
+
+    get data_item_signer() {
+      return this.#data_item_signer;
+    }
+
+    get tx_builder() {
+      return this.#tx_builder;
+    }
 
     constructor(...args: any[]) {
       const [aoconnect, ...rest] = args;
       super(...rest);
-      this.aoconnect = aoconnect;
+      this.#aoconnect = aoconnect;
     }
 
     /**
@@ -41,7 +53,7 @@ export function TransactionBuilder(Base?: Constructor) {
      * @returns `this` instance for further method chaining.
      */
     dataItemSigner(signer: any): this {
-      this.data_item_signer = signer;
+      this.#data_item_signer = signer;
       return this;
     }
 

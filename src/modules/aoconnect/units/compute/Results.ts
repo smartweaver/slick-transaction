@@ -1,7 +1,7 @@
-import { Compute } from "../../../ao/v0/units/Compute";
-import { Results as BaseResults } from "../../../ao/v0/units/compute/Results";
-import { AoConnect } from "../../interfaces/AoConnect";
-import { Process } from "./results/Process";
+import { Compute } from "../../../ao/v0/units/Compute.ts";
+import { Results as BaseResults } from "../../../ao/v0/units/compute/Results.ts";
+import { AoConnect } from "../../interfaces/AoConnect.ts";
+import { Process } from "./results/Process.ts";
 
 export class Results extends BaseResults {
   protected aoconnect: AoConnect;

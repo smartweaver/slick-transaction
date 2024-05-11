@@ -1,6 +1,6 @@
-import { AbstractTransactionSigner } from "../../../../core/AbstractTransactionSigner";
-import { JWK } from "../../../../core/interfaces/JWK";
-import { Transaction as CoreTx } from "../../../../core/interfaces/Transaction";
+import { AbstractTransactionSigner } from "../../../../core/AbstractTransactionSigner.ts";
+import { JWK } from "../../../../core/interfaces/JWK.ts";
+import { Transaction as CoreTx } from "../../../../core/interfaces/Transaction.ts";
 
 interface IArweaveJS {
   /**

@@ -1,5 +1,5 @@
 import { kvpToQueryParamsString } from "../../../utils/FetchUtils.ts";
-import { AbstractProcess, GetResponse } from "./AbstractProcess.ts";
+import { AbstractProcess, GetRequestOptions, GetResponse } from "./AbstractProcess.ts";
 
 export class Process extends AbstractProcess {
   /**
@@ -22,7 +22,7 @@ export class Process extends AbstractProcess {
    *
    * @link [Example URL](https://cu68.ao-testnet.xyz/results/91rtZiRskK4sy4aIDir-waISHDUno3v1MwctlbMpAkg)
    */
-  get(options: CU.Results.Process.GetRequestOptions): Promise<GetResponse> {
+  get(options: GetRequestOptions): Promise<GetResponse> {
     const queryString = kvpToQueryParamsString(options?.query);
 
     return this.compute_unit

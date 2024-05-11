@@ -1,7 +1,7 @@
-import { Client as BaseClient } from "../ao/v0/Client";
-import { Compute } from "./units/Compute";
-import { AoConnect } from "./interfaces/AoConnect";
-import { Messenger } from "./units/Messenger";
+import { Client as BaseClient } from "../ao/v0/Client.ts";
+import { Compute } from "./units/Compute.ts";
+import { AoConnect } from "./interfaces/AoConnect.ts";
+import { Messenger } from "./units/Messenger.ts";
 
 export class Client extends BaseClient {
   protected aoconnect: AoConnect;

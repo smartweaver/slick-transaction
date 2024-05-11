@@ -1,5 +1,5 @@
-import { JWK } from "./JWK";
-import { Transaction as Tx } from "./Transaction";
+import { JWK } from "./JWK.ts";
+import { Transaction as Tx } from "./Transaction.ts";
 
 type Options = {
   key?: JWK;

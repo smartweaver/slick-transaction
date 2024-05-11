@@ -1,3 +1,3 @@
-import { Transaction } from "./Transaction";
+import { Transaction } from "./Transaction.ts";
 
 export type Message = Transaction;

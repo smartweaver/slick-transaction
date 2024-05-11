@@ -1,6 +1,6 @@
-import { Compute } from "../units/Compute";
-import { Messenger } from "../units/Messenger";
-import { Scheduler } from "../units/Scheduler";
+import { Compute } from "../units/Compute.ts";
+import { Messenger } from "../units/Messenger.ts";
+import { Scheduler } from "../units/Scheduler.ts";
 
 export interface Client {
   /**

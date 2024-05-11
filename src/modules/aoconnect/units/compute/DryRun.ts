@@ -1,11 +1,11 @@
 import {
   AbstractDryRun,
   PostResponse,
-} from "../../../ao/v0/units/compute/AbstractDryRun";
-import { Compute } from "../../../ao/v0/units/Compute";
-import { AoConnect } from "../../interfaces/AoConnect";
-import { SDKTags } from "../../tags/SDKTags";
-import { Transaction } from "../../../../standard/transactions/format-2/Transaction";
+} from "../../../ao/v0/units/compute/AbstractDryRun.ts";
+import { Compute } from "../../../ao/v0/units/Compute.ts";
+import { AoConnect } from "../../interfaces/AoConnect.ts";
+import { SDKTags } from "../../tags/SDKTags.ts";
+import { Transaction } from "../../../../standard/transactions/format-2/Transaction.ts";
 
 export class DryRun extends AbstractDryRun {
   protected data_item_signer: any;

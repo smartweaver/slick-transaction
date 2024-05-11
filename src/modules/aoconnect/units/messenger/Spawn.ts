@@ -1,5 +1,5 @@
-import { TransactionBuilder } from "../../builders/TransactionBuilder";
-import { SDKTags } from "../../tags/SDKTags";
+import { TransactionBuilder } from "../../builders/TransactionBuilder.ts";
+import { SDKTags } from "../../tags/SDKTags.ts";
 
 export class Spawn extends TransactionBuilder() {
   protected anchor_id?: string;

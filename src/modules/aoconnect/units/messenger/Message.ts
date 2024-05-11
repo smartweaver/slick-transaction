@@ -1,5 +1,5 @@
-import { TransactionBuilder } from "../../builders/TransactionBuilder";
-import { SDKTags } from "../../tags/SDKTags";
+import { TransactionBuilder } from "../../builders/TransactionBuilder.ts";
+import { SDKTags } from "../../tags/SDKTags.ts";
 
 export class Message extends TransactionBuilder() {
   protected process_id?: string;
