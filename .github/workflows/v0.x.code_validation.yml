@@ -64,4 +64,4 @@ jobs:
 
       - name: Run Tests
         run: |
-          deno task test:unit
+          deno task test:unit --no-watch
