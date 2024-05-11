@@ -16,7 +16,9 @@
     "target": "es2017"
   },
   "include": [
-    "./**/*.ts"
+    "./deps.ts",
+    "./scripts/**/*.ts",
+    "./src/**/*.ts",
   ],
   "exclude": [
     "node_modules"

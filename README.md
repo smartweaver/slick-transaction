@@ -10,7 +10,7 @@ npm install @smartweaver/slick-transaction
 
 ## Usage
 
-### Create a Signed Transaction
+### Create a Transaction
 
 ```ts
 const transaction = await Transaction
@@ -56,7 +56,7 @@ console.log(json);
 ```ts
 const transaction = await Transaction
   .builder()                     // Get the initial transaction builder
-  .arweaveInstance(fakeArweave)  // Provider the arweave-js instance
+  .arweaveInstance(fakeArweave)  // Provide the arweave-js instance for getting required network info
   .transfer()                    // Get the transfer transaction builder
   .target("wallet-address")      // Provide the wallet address receiving the funds
   .quantity("1")                 // Provide the amount of funds to transfer to the wallet address

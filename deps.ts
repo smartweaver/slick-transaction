@@ -22,6 +22,8 @@ const Bundler = {
   },
 }
 
+export { connect, createDataItemSigner } from "@permaweb/aoconnect";
+
 export {
   Arweave,
   ArweaveApiConfig,

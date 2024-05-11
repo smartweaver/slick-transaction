@@ -19,7 +19,7 @@ function copy(files: string[]) {
     try {
       console.log(`\nMoving ${file} to ./dist/${file}`);
       Deno.copyFileSync(`${file}`, `dist/${file}`);
-    } catch (e) {
+    } catch (e: any) {
       console.log(`Error copying file - target: dist/${file}`);
     }
   }
