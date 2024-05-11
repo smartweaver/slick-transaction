@@ -23,7 +23,7 @@ This method chain will send an HTTP GET request to the Compute Unit for the mess
 
 ```ts
 import * as aoconnect from "@permaweb/aoconnect";
-import { Client } from "@smartweaver/slick-contract/modules/aoconnect/Client";
+import { Client } from "@smartweaver/slick-transaction/modules/aoconnect/Client";
 
 // Create new decorated aoconnect client
 const client = new Client(aoconnect);
@@ -45,7 +45,7 @@ This method will send an HTTP GET request to the Compute Unit for all message re
 
 ```ts
 import * as aoconnect from "@permaweb/aoconnect";
-import { Client } from "@smartweaver/slick-contract/modules/aoconnect/Client";
+import { Client } from "@smartweaver/slick-transaction/modules/aoconnect/Client";
 
 // Create new decorated aoconnect client
 const client = new Client(aoconnect);
@@ -70,7 +70,7 @@ This method chain will send an HTTP POST request to the Compute Unit containing 
 
 ```ts
 import * as aoconnect from "@permaweb/aoconnect";
-import { Client } from "@smartweaver/slick-contract/modules/aoconnect/Client";
+import { Client } from "@smartweaver/slick-transaction/modules/aoconnect/Client";
 
 // Create a new decorated aoconnect client
 const client = new Client(aoconnect);
@@ -107,7 +107,7 @@ This method chain will send an HTTP POST request to the Messenger Unit. The resp
 
 ```ts
 import * as aoconnect from "@permaweb/aoconnect";
-import { Client } from "@smartweaver/slick-contract/modules/aoconnect/Client";
+import { Client } from "@smartweaver/slick-transaction/modules/aoconnect/Client";
 
 // Create a new decorated aoconnect client
 const client = new Client(aoconnect);
@@ -136,7 +136,7 @@ This method chain will send an HTTP POST request to the Messenger Unit.
 
 ```ts
 import * as aoconnect from "@permaweb/aoconnect";
-import { Client } from "@smartweaver/slick-contract/modules/aoconnect/Client";
+import { Client } from "@smartweaver/slick-transaction/modules/aoconnect/Client";
 
 // Create a new decorated aoconnect client
 const client = new Client(aoconnect);
