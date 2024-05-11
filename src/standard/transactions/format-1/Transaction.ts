@@ -18,7 +18,9 @@ export class Transaction {
    * @returns An instance of the transaction builder with the `fields` set on
    * the transaction being built.
    */
-  static from(fields: Partial<Tx1 | { tags: Record<string, string>}>): TransactionBuilder {
+  static from(
+    fields: Partial<Tx1 | { tags: Record<string, string> }>,
+  ): TransactionBuilder {
     if (!fields) {
       fields = {};
     }

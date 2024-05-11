@@ -15,7 +15,7 @@ export abstract class AbstractTransactionBuilder<Tx extends Transaction = any> {
     const { tags = {}, ...fields } = attributes;
     this.transaction = fields as Partial<Tx>;
 
-    let normalizedTags = {}
+    let normalizedTags = {};
 
     if (Array.isArray(tags)) {
       for (const tag of tags) {

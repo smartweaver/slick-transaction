@@ -18,7 +18,7 @@
   "include": [
     "./deps.ts",
     "./scripts/**/*.ts",
-    "./src/**/*.ts",
+    "./src/**/*.ts"
   ],
   "exclude": [
     "node_modules"

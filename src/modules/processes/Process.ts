@@ -6,7 +6,7 @@ export class Process<Actions extends string = any> {
   protected process_id: string;
 
   constructor(aoconnect: AoConnect, processId: string) {
-    this.client = new Client(aoconnect)
+    this.client = new Client(aoconnect);
     this.process_id = processId;
   }
 
@@ -31,7 +31,7 @@ export class Process<Actions extends string = any> {
    *     "Some-Optional-Tag": "some value",
    *   })
    *   .anchor("some optional anchor")
-   * 
+   *
    * // Send the action
    * const messageId = action.post();
    *
@@ -45,7 +45,7 @@ export class Process<Actions extends string = any> {
       // Set up the action to be sent to this process
       .process(this.process_id)
       // Ensure this message is set up to send this specific action
-      .tags({ Action: action })
+      .tags({ Action: action });
   }
 
   /**
@@ -77,7 +77,7 @@ export class Process<Actions extends string = any> {
    * Get the results request builder for this process.
    *
    * @returns The results builder -- predefined with this process' ID.
-   * 
+   *
    * @example
    * ```ts
    * // Get the process client -- targeting process ID "1557"
@@ -90,7 +90,7 @@ export class Process<Actions extends string = any> {
    *   .to("optional 'to' ending point cursor")
    *   .limit(15) // Optional number of results to return
    *   .sort("DESC") // Optional sort order of the results when they are returned
-   * 
+   *
    * // Send the query
    * const results = await query.post();
    *

@@ -1,7 +1,8 @@
 import { Transaction } from "../../../standard/transactions/format-2/Transaction";
 import { AoConnect } from "../interfaces/AoConnect";
 
-type Constructor = new (...args: any[]) => {};
+// @ts-ignore Use of `any` is intentional
+type Constructor = new (...args: any[]) => any;
 
 export function TransactionBuilder(Base?: Constructor) {
   const BaseClass = Base || class BaseBuilder {};

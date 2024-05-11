@@ -44,14 +44,14 @@ export class TokenProcess<
    * @param target The target in question.
    * @param quantity The quantity in question.
    * @returns The action builder. You can call `.post()` on it to send it.
-   * 
+   *
    * @example
    * ```ts
    * import * as aoconnect from "@permaweb/aoconnect";
    * import { TokenProcess } from "@smartweaver/slick-transaction/"
-   * 
+   *
    * const token = new TokenProcess(aoconnect, "1557");
-   * 
+   *
    * const result = token
    *   .burn(target: string, quantity: string)
    *   .tags({ "Some-Optional-Tag": "some value" })
@@ -59,7 +59,7 @@ export class TokenProcess<
    *     // ... code that aoconnect should use to sign this `DataItem`
    *   })
    *   .post();
-   * 
+   *
    * // - end of example -
    * ```
    */
@@ -89,14 +89,14 @@ export class TokenProcess<
    * @param target The target in question.
    * @param quantity The quantity in question.
    * @returns The action builder. You can call `.post()` on it to send it.
-   * 
+   *
    * @example
    * ```ts
    * import * as aoconnect from "@permaweb/aoconnect";
    * import { TokenProcess } from "@smartweaver/slick-transaction/"
-   * 
+   *
    * const token = new TokenProcess(aoconnect, "1557");
-   * 
+   *
    * const result = token
    *   .mint(target: string, quantity: string)
    *   .tags({ "Some-Optional-Tag": "some value" })
@@ -104,7 +104,7 @@ export class TokenProcess<
    *     // ... code that aoconnect should use to sign this `DataItem`
    *   })
    *   .post();
-   * 
+   *
    * // - end of example -
    * ```
    */
@@ -123,14 +123,14 @@ export class TokenProcess<
    * @param recipient The recipient in question.
    * @param quantity The quantity in question.
    * @returns The action builder. You can call `.post()` on it to send it.
-   * 
+   *
    * @example
    * ```ts
    * import * as aoconnect from "@permaweb/aoconnect";
    * import { TokenProcess } from "@smartweaver/slick-transaction/"
-   * 
+   *
    * const token = new TokenProcess(aoconnect, "1557");
-   * 
+   *
    * const result = token
    *   .transfer(recipient: string, quantity: string)
    *   .tags({ "Some-Optional-Tag": "some value" })
@@ -138,7 +138,7 @@ export class TokenProcess<
    *     // ... code that aoconnect should use to sign this `DataItem`
    *   })
    *   .post();
-   * 
+   *
    * // - end of example -
    * ```
    */
@@ -151,4 +151,3 @@ export class TokenProcess<
       });
   }
 }
-

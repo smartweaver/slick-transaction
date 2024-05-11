@@ -7,7 +7,7 @@ const expectedSdkName = "@smartweaver/slick-transaction";
 const expectedSdkVersion = packageJson.version + "-" +
   packageJson.versionBuildDate;
 
-vi.mock("@permaweb/aoconnect", async () => {
+vi.mock("@permaweb/aoconnect", () => {
   return {
     default: {
       dryrun: (...args: any[]) => {
@@ -97,7 +97,7 @@ describe("Client", () => {
   //
   // Compute Unit tests
   //
-  describe("cu()", async () => {
+  describe("cu()", () => {
     test("dryRun().post()", async () => {
       const result = await client
         .cu()

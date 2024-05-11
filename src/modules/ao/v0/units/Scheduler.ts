@@ -92,11 +92,11 @@ export class Scheduler {
    * // - end of example -
    * ```
    */
-  post(options: RequestInit): Promise<{ id: string, timestamp: string }> {
+  post(options: RequestInit): Promise<{ id: string; timestamp: string }> {
     const req = this.fetch("/", {
       ...options,
       method: "POST",
-    })
+    });
 
     return req.then((res) => res.json());
   }
