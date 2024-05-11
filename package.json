@@ -1,8 +1,8 @@
 {
   "name": "@smartweaver/slick-transaction",
   "version": "0.0.1",
-  "versionBuildDate": "20240507.1600",
-  "description": "Slick builder APIs for Arweave transaction creation",
+  "versionBuildDate": "20240511.0058",
+  "description": "Slick builder APIs for creating Arweave transactions",
   "author": "Eric Crooks <eric.crooks.github@gmail.com> (https://crookse.com)",
   "license": "GPL-3.0",
   "repository": {
@@ -10,9 +10,6 @@
     "url": "git+ssh://git@github.com/smartweaver/slick-transaction.git"
   },
   "type": "module",
-  "dependencies": {
-    "@smartweaver/core": "~0.0.2"
-  },
   "devDependencies": {
     "esbuild": "~0.19.10",
     "ts-node": "~10.9.2",
