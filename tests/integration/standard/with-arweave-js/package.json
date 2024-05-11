@@ -4,12 +4,5 @@
   "license": "GPL-3.0",
   "dependencies": {
     "arweave": "1.x"
-  },
-  "devDependencies": {
-    "ts-node": "~10.x",
-    "tsup": "~7.x",
-    "typescript": "~5.x",
-    "vite": "~5.x",
-    "vitest": "~1.x"
   }
 }
