@@ -107,6 +107,6 @@ jobs:
       - name: Publish
         run: |
           cd dist
-          pnpm publish --access public
+          deno task publish:npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

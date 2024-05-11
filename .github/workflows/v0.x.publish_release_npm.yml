@@ -107,6 +107,6 @@ jobs:
       - name: Publish
         run: |
           cd dist
-          npm publish --access public
+          deno task publish:npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_TO_NPM_TOKEN }}

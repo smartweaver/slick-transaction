@@ -31,7 +31,7 @@
   "tasks": {
     "build:libs": "deno run --allow-read --allow-write --allow-net ./scripts/doit.ts && pnpm tsup src --format cjs,esm --no-splitting --dts",
     "check:package-json-version": "deno run --allow-read ./scripts/check_package_json_version_for_release.ts",
-    "publish:npm": "npm publish --access-publish",
+    "publish:npm": "npm publish --access public",
     "test:unit": "pnpm vitest"
   }
 }
