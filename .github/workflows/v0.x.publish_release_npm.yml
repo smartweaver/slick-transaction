@@ -89,9 +89,13 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: '@smartweaver'
 
+      - name: Install pnpm
+        run: |
+          npm install -g pnpm
+
       - name: Build package
         run: |
-          yarn install && deno task build:libs
+          pnpm install && deno task build:libs
 
       # Intentional spacing
       #
@@ -103,6 +107,6 @@ jobs:
       - name: Publish
         run: |
           cd dist
-          yarn publish --access public
+          npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_TO_NPM_TOKEN }}

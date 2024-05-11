@@ -89,9 +89,13 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@smartweaver'
 
+      - name: Install pnpm
+        run: |
+          npm install -g pnpm
+
       - name: Build package
         run: |
-          yarn install && deno task build:libs
+          pnpm install && deno task build:libs
 
       - name: (artifacts) Upload package
         uses: actions/upload-artifact@v3
@@ -102,7 +106,7 @@ jobs:
 
       - name: (dry-run) Publish
         run: |
-          npm publish --access restricted --dry-run
+          npm publish --access public --dry-run
         # Intentional spacing
         #
         #

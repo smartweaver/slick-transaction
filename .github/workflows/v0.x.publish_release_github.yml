@@ -89,9 +89,13 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@smartweaver'
 
+      - name: Install pnpm
+        run: |
+          npm install -g pnpm
+
       - name: Build package
         run: |
-          yarn install && deno task build:libs
+          pnpm install && deno task build:libs
 
       # Intentional spacing
       # 
