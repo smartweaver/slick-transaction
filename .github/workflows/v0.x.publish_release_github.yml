@@ -107,6 +107,6 @@ jobs:
       - name: Publish
         run: |
           cd dist
-          yarn publish --access public
+          pnpm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -11,7 +11,8 @@ tmp/
 *.log*
 *wallet.*
 logs
-# We only use yarn
-*lock.yaml
+
+# Nope to npm
 package-lock.json
-!yarn.lock
+# Nope to yarn
+yarn.lock
