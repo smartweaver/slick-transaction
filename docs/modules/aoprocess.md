@@ -1,6 +1,6 @@
 # aoprocess
 
-A builder  for the [`@permaweb/aoconnect`](https://www.npmjs.com/package/@permaweb/aoconnect) `aoconnect` object.
+An implementation of the above aoconnect decorator module, but strictly made for interacting with processes.
 
 ## Overview
 
@@ -16,7 +16,7 @@ Under the hood, this module uses the [`aoconnect`](./aoconnect.md) module. Unlik
   - Used as the foundation for the Token implementation
 - Token
   - Specifically made for interacting with token processes
-  - Has APIs that match token actions (e.g., `mint()`, burn()`, `transfer()`, etc.)
+  - Has APIs that match token actions (e.g., `mint()`, `burn()`, `transfer()`, etc.)
 
 ## API Guides
 
