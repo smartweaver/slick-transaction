@@ -35,7 +35,7 @@ export class Spawn extends TransactionBuilder {
    */
   post(): Promise<string> {
     if (!this.data_item_signer) {
-      throw new Error("Cannot send DryRun without DataItem signer");
+      throw new Error("Cannot spawn process without DataItem signer");
     }
 
     const { data, tags } = this.tx_builder.build();

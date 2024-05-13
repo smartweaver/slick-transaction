@@ -34,11 +34,11 @@ export class Message extends TransactionBuilder {
    */
   post(): Promise<string> {
     if (!this.process_id) {
-      throw new Error("Cannot send DryRun without Process ID");
+      throw new Error("Cannot send message without Process ID");
     }
 
     if (!this.data_item_signer) {
-      throw new Error("Cannot send DryRun without DataItem signer");
+      throw new Error("Cannot send message without DataItem signer");
     }
 
     const { data, tags } = this.tx_builder.build();
