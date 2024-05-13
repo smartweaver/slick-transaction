@@ -40,7 +40,6 @@ copy([
   "AUTHORS",
   "LICENSE",
   "README.md",
-  "bin/cli.js",
 ]);
 
 // Slim down the package.json file before putting it into the distributable

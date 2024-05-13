@@ -109,6 +109,6 @@ jobs:
         run: |
           rm package.json
           cd dist
-          deno task publish:npm
+          npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_TO_NPM_TOKEN }}
