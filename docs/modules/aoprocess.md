@@ -53,7 +53,7 @@ const action = proc
   // Output the result
   // This returns the same return value as the `aoconnect.result({ ... })` the function
   console.log(result);
-});
+})();
 ```
 
 ### Token
@@ -71,7 +71,7 @@ const proc = new Process(aoconnect, "1557");
   // Send a `Balance` action
   const balance = await proc.balance("some-target-address");
   console.log(balance);
-});
+})();
 ```
 
 #### Sending a `Balances` Action
@@ -87,7 +87,7 @@ const proc = new Process(aoconnect, "1557");
   // Send a `Balances` action
   const balances = await proc.balances();
   console.log(balances);
-});
+})();
 ```
 
 #### Sending a `Burn` Action
@@ -103,7 +103,7 @@ const proc = new Process(aoconnect, "1557");
   // Send a `Burn` action
   const burnResult = await proc.burn("some-target-address", "some-quantity-amount");
   console.log(burnResult);
-});
+})();
 ```
 
 #### Sending an `Info` Action
@@ -119,7 +119,7 @@ const proc = new Process(aoconnect, "1557");
   // Send an `Info` action
   const info = await proc.info();
   console.log(info);
-});
+})();
 ```
 
 #### Sending a `Mint` Action
@@ -135,7 +135,7 @@ const proc = new Process(aoconnect, "1557");
   // Send a `Mint` action
   const mintResult = await proc.balance("some-target-address", "some-quantity-amount");
   console.log(mintResult);
-});
+})();
 ```
 
 #### Sending a `Transfer` Action
@@ -151,5 +151,5 @@ const proc = new Process(aoconnect, "1557");
   // Send a `Transfer` action
   const transferResult = await proc.transfer("some-recipient-address", "some-quantity-amount");
   console.log(transferResult)
-});
+})();
 ```
