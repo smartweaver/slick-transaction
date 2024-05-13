@@ -29,11 +29,9 @@
     ]
   },
   "tasks": {
-    "build:libs": "deno run --allow-read --allow-write --allow-net ./scripts/doit.ts && yarn tsup src --format cjs,esm --no-splitting --dts",
+    "build:libs": "deno run --allow-read --allow-write --allow-net ./scripts/doit.ts && pnpm tsup src --format cjs,esm --no-splitting --dts",
     "check:package-json-version": "deno run --allow-read ./scripts/check_package_json_version_for_release.ts",
-    "link-local": "yarn link; deno task build:libs && cd dist && yarn unlink && yarn link",
-    "publish:dry-run": "npm publish --access restricted --dry-run",
-    "publish:npm": "npm publish",
-    "test:unit": "yarn vitest"
+    "publish:npm": "npm publish --access public",
+    "test:unit": "pnpm vitest"
   }
 }

@@ -9,7 +9,7 @@ export class DryRun extends AbstractDryRun {
   /**
    * Make the following request(s):
    * ```text
-   *     GET {cu-url}/dry-run?process-id{process-id}
+   *     GET {cu-url}/dry-run?process-id={process-id}
    * ````
    * @param options (Optional) Options to pass to the request.
    *

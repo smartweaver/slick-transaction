@@ -1,13 +1,13 @@
-import { ComputeUnit } from "../../../../ao/v0/units/Compute";
-import { AbstractMessage } from "../../../../ao/v0/units/compute/result/AbstractMessage";
-import { AoConnect } from "../../../interfaces/AoConnect";
+import { Compute } from "../../../../ao/v0/units/Compute.ts";
+import { AbstractMessage } from "../../../../ao/v0/units/compute/result/AbstractMessage.ts";
+import { AoConnect } from "../../../interfaces/AoConnect.ts";
 
 export class Message extends AbstractMessage {
   protected aoconnect: AoConnect;
   protected process_id?: string;
 
   constructor(
-    computeUnit: ComputeUnit,
+    computeUnit: Compute,
     messageId: string,
     aoconnect: AoConnect,
   ) {

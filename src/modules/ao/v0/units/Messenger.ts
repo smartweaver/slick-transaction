@@ -129,7 +129,7 @@ export class Messenger implements MessengerUnit {
     }
 
     // Ensure defaults
-    options = {
+    const fetchOptions = {
       ...(options || {}),
       headers: {
         "content-type": "application/octet-stream",
@@ -140,7 +140,7 @@ export class Messenger implements MessengerUnit {
       method: "POST",
     };
 
-    const req = this.fetch("/", options);
+    const req = this.fetch("/", fetchOptions);
 
     return req.then((res) => res.json());
   }

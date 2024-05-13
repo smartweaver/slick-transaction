@@ -1,21 +1,10 @@
-import { TransactionBuilder } from "../../builders/TransactionBuilder";
-import { SDKTags } from "../../tags/SDKTags";
+import { TransactionBuilder } from "../../builders/TransactionBuilder.ts";
+import { SDKTags } from "../../tags/SDKTags.ts";
 
-export class Spawn extends TransactionBuilder() {
+export class Spawn extends TransactionBuilder {
   protected anchor_id?: string;
   protected module_id?: string;
   protected scheduler_id?: string;
-
-  /**
-   * Set the anchor to target.
-   *
-   * @param anchor The anchor ID in question.
-   * @returns `this` instance for further method chaining.
-   */
-  anchor(anchor: string) {
-    this.anchor_id = anchor;
-    return this;
-  }
 
   /**
    * Set the module ID this process should spawn with.

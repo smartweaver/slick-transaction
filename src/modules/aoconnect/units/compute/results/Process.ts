@@ -1,9 +1,10 @@
-import { Compute } from "../../../../ao/v0/units/Compute";
+import { Compute } from "../../../../ao/v0/units/Compute.ts";
 import {
   AbstractProcess,
   GetRequestOptions,
-} from "../../../../ao/v0/units/compute/results/AbstractProcess";
-import { AoConnect } from "../../../interfaces/AoConnect";
+  GetResponse,
+} from "../../../../ao/v0/units/compute/results/AbstractProcess.ts";
+import { AoConnect } from "../../../interfaces/AoConnect.ts";
 
 export class Process extends AbstractProcess {
   protected aoconnect: AoConnect;
@@ -78,7 +79,7 @@ export class Process extends AbstractProcess {
     return this;
   }
 
-  get(): Promise<CU.Results.Process.GetResponse> {
+  get(): Promise<GetResponse> {
     const args: any = {
       ...(this.get_request_options.query || {}),
       process: this.process_id,

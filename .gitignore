@@ -11,7 +11,14 @@ tmp/
 *.log*
 *wallet.*
 logs
-# We only use yarn
-*lock.yaml
+
+# Nope to npm
 package-lock.json
-!yarn.lock
+# Nope to yarn
+yarn.lock
+# Nope to pnpm because of the following that will happen in the CI:
+#
+#  ERR_PNPM_OUTDATED_LOCKFILE  Cannot install with "frozen-lockfile" because pnpm-lock.yaml is not up to date with package.json
+#  Note that in CI environments this setting is true by default. If you still need to run install in such cases, use "pnpm install --no-frozen-lockfile"
+#
+pnpm-lock.yaml

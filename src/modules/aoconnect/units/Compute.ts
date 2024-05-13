@@ -1,8 +1,8 @@
-import { Compute as BaseCompute } from "../../ao/v0/units/Compute";
-import { AoConnect } from "../interfaces/AoConnect";
-import { DryRun } from "./compute/DryRun";
-import { Result } from "./compute/Result";
-import { Results } from "./compute/Results";
+import { Compute as BaseCompute } from "../../ao/v0/units/Compute.ts";
+import { AoConnect } from "../interfaces/AoConnect.ts";
+import { DryRun } from "./compute/DryRun.ts";
+import { Result } from "./compute/Result.ts";
+import { Results } from "./compute/Results.ts";
 
 export class Compute extends BaseCompute {
   protected aoconnect: AoConnect;

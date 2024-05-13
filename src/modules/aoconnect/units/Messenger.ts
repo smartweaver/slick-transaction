@@ -1,7 +1,7 @@
-import { Messenger as BaseMessenger } from "../../ao/v0/units/Messenger";
-import { Spawn } from "./messenger/Spawn";
-import { AoConnect } from "../interfaces/AoConnect";
-import { Message } from "./messenger/Message";
+import { Messenger as BaseMessenger } from "../../ao/v0/units/Messenger.ts";
+import { Spawn } from "./messenger/Spawn.ts";
+import { AoConnect } from "../interfaces/AoConnect.ts";
+import { Message } from "./messenger/Message.ts";
 
 export class Messenger extends BaseMessenger {
   protected aoconnect: AoConnect;

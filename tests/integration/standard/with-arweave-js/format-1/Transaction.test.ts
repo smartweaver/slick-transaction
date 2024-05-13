@@ -117,7 +117,7 @@ describe("methods", () => {
       expect(txFormat1Signed).toStrictEqual(expected);
     });
 
-    test.skip("can build a data transaction", async () => {
+    test("can build a data transaction", async () => {
       const arweave = FakeArweave.init({
         host: "localhost",
         port: 1984,
@@ -144,18 +144,18 @@ describe("methods", () => {
       expect(verified).toBe(true);
 
       const expected = {
-        format: 2,
+        format: 1,
         id: signed.id,
         last_tx:
           "93yl0l9qof315o1p0q5hi1811kncm2rdx3o13ann8imlp3vn4pgz4l78kvvm6q54",
         owner:
           "mEA1Y0bBD5XhGwOEpAl5clgR5HaFzhR5-jvhNce-xLb7NhGFYEqwklqm4ZKmVqcjm-5sI2juGrrefTSBrr4t43a15x3BGcPwxC0fm0rVClw5twrpXNzlWNCuXXUZfggjcC4vI_8crSUvy9rq_xQoKp4vEl-DpiTGHnJv_mX9__E_Y26l9I8zjFEjmg3L9tURYarj9Jkxuf3kP9KJPMFk_i4LCvmQYyRAXyRfnY6DXG3XnPcyIiy9Lew9A1p5myIkXyGCpHrBcbNFp9UVWiTs57pWrTzl4UO1vPT8qxlaMpXTzBU2xB2w3N4duTlRVCH_qHmj4GY1uZAZdLg30k6RMrqP4Hrv_q1zfnv0a2jZyIxBf4cEETFi4F9IS-UB5KR9GMgwgGkYv7nK3-biXW8z3pAXUriLPwVlmuTkWkgvNMavP1tYxudS6uQ1k-CwJliZYAj-HkLXPXZqZIr6WwNVltICKTvMmQpH37JFvWzE7kBXTS-FFqA-Gtbxv8BpEbPXC6tgA96jUxDV7wcnTNbuZJzP1ukpZYhXl--0XS6z7f89IVD0xwabySoNgnQxbLKnjXmJxzPevBE3WWQU_wFhSaOIpHvfL0IAxQw50lIQwWOrpQj6VacLnaXOAS0BaQyta-0N0sGcVQv14cuAfpEF_Qy-lJNpwkfspLCjZFRiRN8",
-        tags: {},
+        tags: [],
         target: "",
         quantity: "1",
         data: btoa(data).replace(/==/, ""),
         data_size: "7",
-        data_root: "j4nkNxuXeuosaVnAx9TFvXe2lqtaQ7HHaXOEGnWqCSo",
+        data_root: "",
         data_tree: undefined,
         reward: "65596",
         signature: signed.signature,

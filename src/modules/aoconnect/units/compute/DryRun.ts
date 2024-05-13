@@ -1,13 +1,15 @@
 import {
   AbstractDryRun,
   PostResponse,
-} from "../../../ao/v0/units/compute/AbstractDryRun";
-import { Compute } from "../../../ao/v0/units/Compute";
-import { AoConnect } from "../../interfaces/AoConnect";
-import { SDKTags } from "../../tags/SDKTags";
-import { Transaction } from "../../../../standard/transactions/format-2/Transaction";
+} from "../../../ao/v0/units/compute/AbstractDryRun.ts";
+import { Compute } from "../../../ao/v0/units/Compute.ts";
+import { AoConnect } from "../../interfaces/AoConnect.ts";
+import { SDKTags } from "../../tags/SDKTags.ts";
+import { Transaction } from "../../../../standard/transactions/format-2/Transaction.ts";
 
 export class DryRun extends AbstractDryRun {
+  protected _id?: string;
+  protected _owner?: string;
   protected data_item_signer: any;
   protected anchor_id?: string;
   protected process_id?: string;
@@ -50,6 +52,28 @@ export class DryRun extends AbstractDryRun {
    */
   dataItemSigner(signer: any): this {
     this.data_item_signer = signer;
+    return this;
+  }
+
+  /**
+   * Set the ID this DryRun message should use.
+   *
+   * @param id The ID in question.
+   * @returns `this` instance for further method chaining.
+   */
+  id(id: string): this {
+    this._id = id;
+    return this;
+  }
+
+  /**
+   * Set the owner ID this DryRun message should use.
+   *
+   * @param owner The owner ID in question.
+   * @returns `this` instance for further method chaining.
+   */
+  owner(owner: string): this {
+    this._owner = owner;
     return this;
   }
 
@@ -105,6 +129,14 @@ export class DryRun extends AbstractDryRun {
 
     if (data) {
       args.data = data;
+    }
+
+    if (this._id) {
+      args.id = this._id;
+    }
+
+    if (this._owner) {
+      args.owner = this._owner;
     }
 
     return this.aoconnect.dryrun(args);

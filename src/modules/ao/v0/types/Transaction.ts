@@ -1,5 +1,5 @@
-import { Owner } from "./Owner";
-import { Tag } from "./Tag";
+import { Owner } from "./Owner.ts";
+import { Tag } from "./Tag.ts";
 
 export type Transaction = {
   id: string;

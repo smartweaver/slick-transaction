@@ -1,4 +1,4 @@
-import { Process } from "./Process";
+import { Process } from "./Process.ts";
 
 export type TokenActions =
   | "Balance"
@@ -48,7 +48,7 @@ export class TokenProcess<
    * @example
    * ```ts
    * import * as aoconnect from "@permaweb/aoconnect";
-   * import { TokenProcess } from "@smartweaver/slick-transaction/"
+   * import { TokenProcess } from "@smartweaver/slick-transaction/modules/processes/TokenProcess"
    *
    * const token = new TokenProcess(aoconnect, "1557");
    *
@@ -93,7 +93,7 @@ export class TokenProcess<
    * @example
    * ```ts
    * import * as aoconnect from "@permaweb/aoconnect";
-   * import { TokenProcess } from "@smartweaver/slick-transaction/"
+   * import { TokenProcess } from "@smartweaver/slick-transaction/modules/processes/TokenProcess"
    *
    * const token = new TokenProcess(aoconnect, "1557");
    *
@@ -127,7 +127,7 @@ export class TokenProcess<
    * @example
    * ```ts
    * import * as aoconnect from "@permaweb/aoconnect";
-   * import { TokenProcess } from "@smartweaver/slick-transaction/"
+   * import { TokenProcess } from "@smartweaver/slick-transaction/modules/processes/TokenProcess"
    *
    * const token = new TokenProcess(aoconnect, "1557");
    *

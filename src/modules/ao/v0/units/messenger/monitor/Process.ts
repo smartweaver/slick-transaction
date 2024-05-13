@@ -1,4 +1,4 @@
-import { MessengerUnit } from "../../../interfaces/MessengerUnit";
+import { MessengerUnit } from "../../../interfaces/MessengerUnit.ts";
 
 /**
  * This class is responsible for interacting with the following endpoints:

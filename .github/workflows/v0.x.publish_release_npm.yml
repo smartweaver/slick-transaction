@@ -83,15 +83,20 @@ jobs:
       - name: Install Deno
         uses: denoland/setup-deno@v1
 
-      - name: Install Node (latest)
+      - name: Install Node (20.x)
         uses: actions/setup-node@v3
         with:
+          node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
           scope: '@smartweaver'
 
+      - name: Install pnpm
+        run: |
+          npm install -g pnpm
+
       - name: Build package
         run: |
-          yarn install && deno task build:libs
+          pnpm install && deno task build:libs
 
       # Intentional spacing
       #
@@ -103,6 +108,6 @@ jobs:
       - name: Publish
         run: |
           cd dist
-          yarn publish --access public
+          deno task publish:npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_TO_NPM_TOKEN }}

@@ -1,5 +1,5 @@
-import { Client } from "../aoconnect/Client";
-import { AoConnect } from "../aoconnect/interfaces/AoConnect";
+import { Client } from "../aoconnect/Client.ts";
+import { AoConnect } from "../aoconnect/interfaces/AoConnect.ts";
 
 export class Process<Actions extends string = any> {
   protected client: Client;
