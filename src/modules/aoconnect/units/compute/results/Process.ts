@@ -85,6 +85,10 @@ export class Process extends AbstractProcess {
       process: this.process_id,
     };
 
+    if (this.get_request_options?.query?.limit) {
+      args.limit = +this.get_request_options.query.limit;
+    }
+
     return this.aoconnect.results(args);
   }
 }
