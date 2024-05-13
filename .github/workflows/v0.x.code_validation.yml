@@ -62,8 +62,10 @@ jobs:
       - name: Install Deno (for `deno` command)
         uses: denoland/setup-deno@v1
 
-      - name: Install Node (latest)
+      - name: Install Node (20.x)
         uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
 
       - name: Install pnpm
         run: |
