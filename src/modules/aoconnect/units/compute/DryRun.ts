@@ -108,10 +108,6 @@ export class DryRun extends AbstractDryRun {
       throw new Error("Cannot send DryRun without Process ID");
     }
 
-    if (!this.data_item_signer) {
-      throw new Error("Cannot send DryRun without DataItem signer");
-    }
-
     const { data, tags } = this.tx_builder.build();
 
     const args: any = {
@@ -120,7 +116,6 @@ export class DryRun extends AbstractDryRun {
         ...SDKTags,
       ],
       process: this.process_id,
-      signer: this.data_item_signer,
     };
 
     if (this.anchor_id) {
@@ -137,6 +132,10 @@ export class DryRun extends AbstractDryRun {
 
     if (this._owner) {
       args.owner = this._owner;
+    }
+
+    if (this.data_item_signer) {
+      args.signer = this.data_item_signer;
     }
 
     return this.aoconnect.dryrun(args);
