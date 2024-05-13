@@ -11,7 +11,7 @@ This module wraps (aka decorates) the `aoconnect` object to provide builder patt
 - Provide reusable and extensible code that works with ao's units at their HTTP endpoints
 - Provide reusable and extensible code that works with the `@permaweb/aoconnect` library
 
-Under the hood, this module uses lower level APIs in the [`ao`](../../src/ao) module. The `ao` module provides direct HTTP access to ao's units. However, unlike `@permaweb/aoconnect`, it does not (and will not) provide built-ins to handle caching, redirections, and other features that `@permaweb/aoconnect` provides. The `ao` module is intended to be used as low level APIs that should be extended.
+Under the hood, this module uses lower level APIs in the [`ao`](./ao.md) module. The `ao` module provides direct HTTP access to ao's units. However, unlike `@permaweb/aoconnect`, it does not (and will not) provide built-ins to handle caching, redirections, and other features that `@permaweb/aoconnect` provides. The `ao` module is intended to be used as low level APIs that should be extended.
 
 ## Syntax Comparison
 
