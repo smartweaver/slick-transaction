@@ -25,6 +25,10 @@ The modules below extend Slick Transaction's lower level APIs. These modules are
 
 ### aoconnect
 
+The example below shows a working copy of the `aoconnect` module. This code can be found in the [`examples/aoconnect`](./examples/aoconnect) directory.
+
+To see a comparison of this module and `@permaweb/aoconnect`, view this module's [Syntax Comparison](./docs/modules/aoconnect.md#syntax-comparison) documentation.
+
 ```ts
 import * as aoconnect from "@permaweb/aoconnect";
 import { Client } from "@smartweaver/slick-transaction/modules/aoconnect/Client.js";
