@@ -98,7 +98,7 @@ jobs:
           pnpm install && deno task build:libs
 
       - name: (artifacts) Upload package
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ github.event.inputs.tag_name }}
           path: dist
@@ -106,6 +106,7 @@ jobs:
 
       - name: (dry-run) Publish
         run: |
+          cd dist
           npm publish --access public --dry-run
         # Intentional spacing
         #
