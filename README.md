@@ -19,3 +19,4 @@ The modules below extend Slick Transaction's lower level APIs. These modules are
 | - | - | - |
 | ao        | A clean, idiomatic client for the ao APIs. Methods are written to _closely_ match the ao APIs they target.         | [Docs](./docs/modules/ao.md) | 
 | aoconnect | A decorator for the [`@permaweb/aoconnect`](https://www.npmjs.com/package/@permaweb/aoconnect) `aoconnect` object. | [Docs](./docs/modules/aoconnect.md)
+| aoprocess | An implementation of the above aoconnect decorator module, but strictly made for interacting with processes.       | [Docs](./docs/modules/aoprocess.md)

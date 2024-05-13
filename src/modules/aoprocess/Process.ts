@@ -11,7 +11,7 @@ export class Process<Actions extends string = any> {
   }
 
   /**
-   * Get a action request builder for the given action.
+   * Get an action request builder for the given action.
    *
    * @param action The name of the action to build the message for.
    * @returns The action builder -- predefined with this process' ID.
@@ -23,6 +23,7 @@ export class Process<Actions extends string = any> {
    *
    * // Build the action request
    * const action = proc
+   *   .action("some optional anchor")
    *   .dataItemSigner(() => {
    *     // ... code that aoconnect should use to sign this `DataItem`
    *   })
@@ -30,10 +31,9 @@ export class Process<Actions extends string = any> {
    *   .tags({
    *     "Some-Optional-Tag": "some value",
    *   })
-   *   .anchor("some optional anchor")
    *
    * // Send the action
-   * const messageId = action.post();
+   * const messageId = await action.post();
    *
    * // - end of example -
    * ```
@@ -49,6 +49,20 @@ export class Process<Actions extends string = any> {
   }
 
   /**
+   * Get DryRun message request builder for the given action.
+   *
+   * @param action The name of the action to build the DryRun message for.
+   * @returns The DryRun message builder - predefined with this process' ID.
+   */
+  dryRun(action: Actions) {
+    return this.client
+      .cu()
+      .dryRun()
+      .process(this.process_id)
+      .tags({ Action: action });
+  }
+
+  /**
    * Get the result of the message with the given ID.
    *
    * @returns The message's result.
@@ -59,7 +73,7 @@ export class Process<Actions extends string = any> {
    * const proc = new Process(aoconnect, "1557");
    *
    * // Get the result of message "1447"
-   * const result = proc.message("1447");
+   * const result = await proc.message("1447");
    *
    * // - end of example -
    * ```
