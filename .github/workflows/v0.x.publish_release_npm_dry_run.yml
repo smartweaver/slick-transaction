@@ -107,6 +107,7 @@ jobs:
 
       - name: (dry-run) Publish
         run: |
+          rm package.json
           cd dist
           npm publish --access public --dry-run
         # Intentional spacing

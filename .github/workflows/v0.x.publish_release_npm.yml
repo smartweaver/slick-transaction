@@ -107,6 +107,7 @@ jobs:
 
       - name: Publish
         run: |
+          rm package.json
           cd dist
           deno task publish:npm
         env:
