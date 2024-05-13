@@ -19,7 +19,7 @@ export class Process extends AbstractProcess {
    * const res = await new ComputeUnit()
    *   .results()
    *   .process("1447")
-   *   .get({ from: "", to: "", sort: "ASC", limit: 25 });
+   *   .get({ query: { from: "", to: "", sort: "ASC", limit: 25 } });
    *
    * // - end of example -
    * ```

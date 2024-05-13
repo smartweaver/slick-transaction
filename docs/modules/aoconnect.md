@@ -13,6 +13,185 @@ This module wraps (aka decorates) the `aoconnect` object to provide builder patt
 
 Under the hood, this module uses lower level APIs in the [`ao`](../../src/ao) module. The `ao` module provides direct HTTP access to ao's units. However, unlike `@permaweb/aoconnect`, it does not (and will not) provide built-ins to handle caching, redirections, and other features that `@permaweb/aoconnect` provides. The `ao` module is intended to be used as low level APIs that should be extended.
 
+## Syntax Comparison
+
+The code below shows the syntax comparison between `@permaweb/aoconnect` and Slick Transaction's `aoconnect` module. The `import` statements and some code have been omitted for brevity.
+
+<table>
+  <thead>
+    <tr>
+      <td><strong>aoconnect</strong></td>
+      <td><strong>Slick Transaction</strong></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+<td>
+
+```ts
+////////////////////////////////////////////////////////////
+//
+// Get a message result
+//
+const response = await result({
+
+
+  message: "1447",
+  process: "1557",
+});
+
+////////////////////////////////////////////////////////////
+//
+// Get message results
+//
+const response = await results({
+
+
+  process: "1557",
+  from: "cursor,
+  to: "cursor"
+  sort: "DESC",
+  limit: 25,
+});
+
+////////////////////////////////////////////////////////////
+//
+// Send a message
+//
+const messageId = await message({
+
+
+  process: "1557",
+  signer: /* DataItem signer code here */,
+
+
+  anchor: "cursor",
+  data: "some data",
+  tags: [
+    { name: "Some-Tag", value: "value" },
+  ],
+});
+
+////////////////////////////////////////////////////////////
+//
+// Send a DryRun message
+//
+const result = await dryrun({
+
+
+  process: "1557,
+  data: "some data",
+  tags: [
+    { name: "Action", value: "Balance" }
+  ],
+  anchor: "cursor",
+});
+
+////////////////////////////////////////////////////////////
+//
+// Spawn a new process
+//
+const processId = await spawn({
+  
+
+  signer: /* DataItem signer code here */,
+
+  
+  module: "1667",
+  scheduler: "1887",
+  tags: [
+    { name: "Some-Tag", value: "value" },
+  ],
+  data: "some data",
+});
+```
+
+</td>
+<td>
+
+```ts
+////////////////////////////////////////////////////////////
+//
+// Get a message result
+//
+const response = await client
+  .cu()                   // Access the Compute Unit methods
+  .result()               // Access the Compute Unit's "message result" methods
+  .message("1447")        // Provide the ID of the message you want to get the result of
+  .process("1557")        // Provide the process ID where the message was sent to
+  .get();                 // Get the message result (calls HTTP GET under the hood -- hence the method name)
+
+////////////////////////////////////////////////////////////
+//
+// Get message results
+//
+const response = await client
+  .cu()                   // Access the Compute Unit methods
+  .results()              // Access the Compute Unit's results methods to get results from a process
+  .process("1557")        // Provide the process ID you want to get messages from
+  .from("cursor")         // Optionally, provide a starting point cursor
+  .to("cursor")           // Optionally, provide a endpoint point cursor
+  .sort("DESC")           // Optionally, provide a sort order of the returned results (DESC|ASC)
+  .limit(25)              // Optionally, provide a number of messages to return
+  .get();                 // Get the results (calls HTTP GET under the hood -- hence the method name)
+
+////////////////////////////////////////////////////////////
+//
+// Send a message
+//
+const response = await client
+  .mu()                   // Access the Messenger Unit methods
+  .message()              // Access the Messenger Unit's message methods to send a message to a process
+  .process("1557")        // Provide the process ID you want to send this message to
+  .dataItemSigner(() => { // Provide the `DataItem` signer aoconnect should use for this message
+    // ... code here      //
+  })                      //
+  .anchor("cursor")       // Optionally, provide a anchor cursor you want to use for this message
+  .data("some data")      // Optionally, send data with this message
+  .tags({                 // Optionally, send tags with this message
+    "Some-Tag": "value",  //
+  })                      //
+  .post();                // Send the message (calls HTTP POST under the hood -- hence the method name)
+
+////////////////////////////////////////////////////////////
+//
+// Send a DryRun message
+//
+const response = await client
+  .cu()                   // Access the Compute Unit methods
+  .dryRun()               // Access the Compute Uni's  DryRun methods to send a DryRun message to a process
+  .process("1557")        // Provide the process ID you want to send this message to
+  .data("some data")      // Optionally, send data with the message
+  .tags({                 // Optionally, send tags with the message
+    "Action": "Balance",  //
+  })                      //
+  .anchor("cursor")       // Optionally, provide a anchor cursor you want to use for this message
+  .post();                // Send the message (calls HTTP POST under the hood -- hence the method name)
+
+////////////////////////////////////////////////////////////
+//
+// Spawn a new process
+//
+const response = await client
+  .mu()                   // Access the Messenger Unit methods
+  .spawn()                // Access the Messgener Unit's spawn methods to spawn a new process
+  .dataItemSigner(() => { // Provide the `DataItem` signer aoconnect should use for this message
+    // ... code here      //
+  })                      //
+  .module("1667")         // Optionally, provide the module this process should use
+  .schduler("1887")       // Optionally, provide the Scheduler Unit to handle the process
+  .tags({                 // Optionally, send tags with this message
+    "Some-Tag": "value",  //
+  })                      //
+  .data("some data")      // Optionally, send data with this message
+  .post();                // Send the request (calls HTTP POST under the hood)
+```
+  
+</td>
+    </tr>
+  </tbody>
+</table>
+
 ## API Guides
 
 ### Compute Unit
@@ -23,14 +202,14 @@ This method chain will send an HTTP GET request to the Compute Unit for the mess
 
 ```ts
 import * as aoconnect from "@permaweb/aoconnect";
-import { Client } from "@smartweaver/slick-transaction/modules/aoconnect/Client";
+import { Client } from "@smartweaver/slick-contract/modules/aoconnect/Client";
 
 // Create new decorated aoconnect client
 const client = new Client(aoconnect);
 
 const response = await client
   .cu()            // Access the Compute Unit methods
-  .result()        // Access the Compute Unit message result methods
+  .result()        // Access the Compute Unit's "message result" methods
   .message("1447") // Provide the ID of the message you want to get the result of
   .process("1557") // Provide the process ID where the message was sent to
   .get();          // Get the message result (calls HTTP GET under the hood -- hence the method name)
@@ -45,14 +224,14 @@ This method will send an HTTP GET request to the Compute Unit for all message re
 
 ```ts
 import * as aoconnect from "@permaweb/aoconnect";
-import { Client } from "@smartweaver/slick-transaction/modules/aoconnect/Client";
+import { Client } from "@smartweaver/slick-contract/modules/aoconnect/Client";
 
 // Create new decorated aoconnect client
 const client = new Client(aoconnect);
 
 const response = await client
   .cu()            // Access the Compute Unit methods
-  .results()       // Access the Compute Unit results methods
+  .results()       // Access the Compute Unit's results methods to get results from a process
   .process("1557") // Provide the process ID you want to get messages from
   .limit(25)       // Optionally, provide a number of messages to return
   .from("cursor")  // Optionally, provide a starting point cursor
@@ -70,18 +249,15 @@ This method chain will send an HTTP POST request to the Compute Unit containing 
 
 ```ts
 import * as aoconnect from "@permaweb/aoconnect";
-import { Client } from "@smartweaver/slick-transaction/modules/aoconnect/Client";
+import { Client } from "@smartweaver/slick-contract/modules/aoconnect/Client";
 
 // Create a new decorated aoconnect client
 const client = new Client(aoconnect);
 
 const response = await client
   .cu()                   // Access the Compute Unit methods
-  .dryRun()               // Access the Compute Unit DryRun methods
+  .dryRun()               // Access the Compute Uni's  DryRun methods to send a DryRun message to a process
   .process("1557")        // Provide the process ID you want to send this message to
-  .dataItemSigner(() => { // Provide the `DataItem` signer aoconnect should use
-    // ... code here
-  })
   .anchor("cursor")       // Optionally, provide a anchor cursor you want to use for this message
   .tags({                 // Optionally, send tags with the message
     "Some-Tag": "value",
@@ -107,14 +283,14 @@ This method chain will send an HTTP POST request to the Messenger Unit. The resp
 
 ```ts
 import * as aoconnect from "@permaweb/aoconnect";
-import { Client } from "@smartweaver/slick-transaction/modules/aoconnect/Client";
+import { Client } from "@smartweaver/slick-contract/modules/aoconnect/Client";
 
 // Create a new decorated aoconnect client
 const client = new Client(aoconnect);
 
 const response = await client
   .mu()                   // Access the Messenger Unit methods
-  .message()              // Access the Messenger Unit message methods
+  .message()              // Access the Messenger Unit's message methods to send a message to a process
   .process("1557")        // Provide the process ID you want to send this message to
   .dataItemSigner(() => { // Provide the `DataItem` signer aoconnect should use for this message
     // ... code here
@@ -136,14 +312,14 @@ This method chain will send an HTTP POST request to the Messenger Unit.
 
 ```ts
 import * as aoconnect from "@permaweb/aoconnect";
-import { Client } from "@smartweaver/slick-transaction/modules/aoconnect/Client";
+import { Client } from "@smartweaver/slick-contract/modules/aoconnect/Client";
 
 // Create a new decorated aoconnect client
 const client = new Client(aoconnect);
 
 const response = await client
   .mu()                   // Access the Messenger Unit methods
-  .spawn()                // Access the process spawner methods
+  .spawn()                // Access the Messgener Unit's spawn methods to spawn a new process
   .dataItemSigner(() => { // Provide the `DataItem` signer aoconnect should use for this message
     // ... code here
   })
