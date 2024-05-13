@@ -1,0 +1,13 @@
+{
+  "name": "v0.0.1",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@permaweb/aoconnect": "^0.0.53",
+    "@smartweaver/slick-transaction": "0.0.9"
+  }
+}
