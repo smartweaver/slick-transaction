@@ -15,6 +15,49 @@ Under the hood, this module uses lower level APIs in the [`ao`](./ao.md) module.
 
 If you are interested in seeing how aoconnect's syntax maps to this module, check out the [Syntax Comparison](#syntax-comparison) below.
 
+## Quickstart
+
+1. Install [`@permaweb/aoconnect`](https://www.npmjs.com/package/@permaweb/aoconnect).
+
+    ```text
+    npm install @permaweb/aoconnect
+    ```
+
+1. Install [`@smartweaver/slick-transaction`](https://www.npmjs.com/package/@smartweaver/slick-transaction).
+
+    ```text
+    npm install @smartweaver/slick-transaction
+    ```
+
+1. Create an `app.js` file. You can copy the [`examples/aoconnect/app.js`](../../examples/aoconnect/app.js) as inspiration.
+
+1. Follow one of the [API Guides](#api-guides) below -- adding the code to your `app.js` file. For example, get a message result:
+
+    ```js
+    // File: app.js
+
+    import * as aoconnect from "@permaweb/aoconnect";
+    import { Client } from "@smartweaver/slick-transaction/modules/aoconnect/Client";
+
+    // Create new decorated aoconnect client
+    const client = new Client(aoconnect);
+
+    const msgId = "wSbmo3kkzDGWNEziIAiIybob1VsiIsVqp0i0siX8QfQ";
+    const procId = "G3vHz_3XOUAzzVciJCnDf0NLRjbL6bjwRT5mAclrLrk";
+
+    (async () => {
+      const response = await client
+        .cu()            // Access the Compute Unit methods
+        .result()        // Access the Compute Unit's "message result" methods
+        .message(msgId)  // Provide the ID of the message you want to get the result of
+        .process(procId) // Provide the process ID where the message was sent to
+        .get();          // Get the message result (calls HTTP GET under the hood -- hence the method name)
+
+      // Output the response
+      console.log(response);
+    })();
+    ```
+
 ## API Guides
 
 ### Compute Unit
