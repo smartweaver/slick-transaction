@@ -17,6 +17,8 @@ If you are interested in seeing how aoconnect's syntax maps to this module, chec
 
 ## Quickstart
 
+_Note: The code below assumes you are using ESM modules._
+
 1. Install [`@permaweb/aoconnect`](https://www.npmjs.com/package/@permaweb/aoconnect).
 
     ```text
@@ -37,7 +39,7 @@ If you are interested in seeing how aoconnect's syntax maps to this module, chec
     // File: app.js
 
     import * as aoconnect from "@permaweb/aoconnect";
-    import { Client } from "@smartweaver/slick-transaction/modules/aoconnect/Client";
+    import { Client } from "@smartweaver/slick-transaction/modules/aoconnect/Client.js";
 
     // Create new decorated aoconnect client
     const client = new Client(aoconnect);
@@ -56,6 +58,12 @@ If you are interested in seeing how aoconnect's syntax maps to this module, chec
       // Output the response
       console.log(response);
     })();
+    ```
+
+1. Run your `app.js` file.
+
+    ```text
+    node app.js
     ```
 
 ## API Guides
