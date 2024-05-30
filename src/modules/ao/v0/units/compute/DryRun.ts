@@ -1,9 +1,5 @@
 import { hasParams, kvpToQueryParamsString } from "../../utils/FetchUtils.ts";
-import {
-  AbstractDryRun,
-  PostOptions,
-  PostResponse,
-} from "./AbstractDryRun.ts";
+import { AbstractDryRun, PostOptions, PostResponse } from "./AbstractDryRun.ts";
 
 export class DryRun extends AbstractDryRun {
   /**
