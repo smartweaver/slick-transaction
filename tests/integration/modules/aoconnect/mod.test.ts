@@ -167,7 +167,7 @@ describe("Client", () => {
         {
           process: "1557",
           from: "from-cursor",
-          limit: "25", // This should be a string even though the builder expects a number
+          limit: 25, // This should be a string even though the builder expects a number
           sort: "DESC",
           to: "to-cursor",
         },
