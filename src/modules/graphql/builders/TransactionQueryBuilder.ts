@@ -21,7 +21,7 @@ export class TransactionQueryBuilder extends AbstractQueryBuilder {
 
   constructor(options?: QueryBuilderOptions) {
     super(options);
-    this.return_schema = defaultTransactionQueryProjection
+    this.return_schema = defaultTransactionQueryProjection;
   }
 
   build() {
