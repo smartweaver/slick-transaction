@@ -1,10 +1,11 @@
 import { describe, expect, test } from "vitest";
-import { query } from "../../../../src/modules/graphql/Client.ts";
+import { query } from "../../../../src/modules/graphql/Query.ts";
 
 describe("query()", () => {
   describe("tags()", () => {
     test("Pushed-For", async () => {
       const res = await query()
+        .forTransactions()
         .tags([
           {
             name: "Pushed-For",
