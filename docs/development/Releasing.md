@@ -8,7 +8,7 @@ __Release__
 
 These steps include tasks to release a new version.
 
-__Post Release___
+__Post Release__
 
 These steps include tasks that need to be performed after a release has succeeded or failed.
 
