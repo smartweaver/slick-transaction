@@ -9,6 +9,16 @@
     "type": "git",
     "url": "git+ssh://git@github.com/smartweaver/slick-transaction.git"
   },
+  "contributors": [
+    {
+      "name": "Eric Crooks",
+      "url": "https://github.com/crookse"
+    },
+    {
+      "name": "Sean Crooks",
+      "url": "https://github.com/crooks-s"
+    }
+  ],
   "type": "module",
   "devDependencies": {
     "esbuild": "~0.19.10",
@@ -24,10 +34,10 @@
     "blockweave",
     "crypto",
     "dapps",
-    "drashland",
     "framework",
     "http",
     "permanence",
+    "smartweaver",
     "transactions",
     "web3"
   ]
