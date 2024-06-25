@@ -1,0 +1,57 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+
+change-template: '- $TITLE (#$NUMBER)'
+
+# Only add to the draft release when a PR has one of these labels
+include-labels:
+  - 'release-major'
+  - 'release-minor'
+  - 'release-patch'
+  - 'release-chore'
+
+# This is how we determine the release version -- using labels. For example,
+# when the "release-minor" label is used, the drafter knows to bump up to a new
+# minor version.
+version-resolver:
+  major:
+    labels:
+      - 'release-major'
+  minor:
+    labels:
+      - 'release-minor'
+  patch:
+    labels:
+      - 'release-patch'
+      - 'release-chore' # allow our chore PRs to just be patches too
+  default: patch
+
+# What our Release Summary will look like. If no draft has been created, then
+# this will be used, otherwise $CHANGES just gets addedd.
+template: |
+  ```
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+  Before releasing, make sure the version in package.json matches the version being released here.
+
+  Delete this code block before publishing this release.
+
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  ```
+
+  ## Compatibility
+
+  * Requires Node v20.x+
+
+  ## Documentation
+
+  * [Full Documentation](https://github.com/smartweaver/slick-transaction/tree/v0.x/docs)
+
+  ## Release Summary
+
+  $CHANGES
+  
