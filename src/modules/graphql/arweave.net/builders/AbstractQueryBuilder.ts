@@ -1,20 +1,34 @@
 import { QueryBuilderOptions } from "../types/QueryBuilderOptions.ts";
 
-export abstract class AbstractQueryBuilder {
-  protected return_schema = "{}";
+export abstract class AbstractQueryBuilder<Variables> {
+  protected abstract query: string;
+
   protected server_url: string;
-  protected variables: string;
+  protected operation_variables: Partial<Variables> = {};
+  protected return_schema: string;
 
   constructor(options: QueryBuilderOptions) {
     this.server_url = options?.server_url || "https://arweave.net/graphql";
-    this.variables = options?.variables || "";
+  }
+
+  variables(variables: Variables) {
+    this.operation_variables = {
+      ...(this.operation_variables || {}),
+      ...(variables || {}),
+    };
+
+    return this;
   }
 
   /**
    * Build this query.
    * @return The query as a string to send to the GraphQL server.
    */
-  abstract build(): string;
+  abstract build(): {
+    operationName: string;
+    query: string;
+    variables: Partial<Variables>;
+  };
 
   /**
    * Make a `fetch` request to the GraphQL server.
@@ -26,7 +40,7 @@ export abstract class AbstractQueryBuilder {
    */
   post(
     options: RequestInit & { url?: string } = {},
-  ): Promise<Response & { graph<T = any>(): Promise<T> }> {
+  ): Promise<Response> {
     const query = this.build();
 
     if (!options.url) {
@@ -40,11 +54,7 @@ export abstract class AbstractQueryBuilder {
         "accpet": "application/json, text/plain, */*",
       },
       ...(options || {}),
-      body: JSON.stringify({
-        query,
-        operationName: null,
-        variables: {},
-      }),
+      body: JSON.stringify(query),
       method: "POST",
     });
 
@@ -102,27 +112,14 @@ export abstract class AbstractQueryBuilder {
    * ```
    */
   returnSchema(schema?: string) {
-    this.return_schema = schema || "{}";
+    this.return_schema = schema;
     return this;
   }
 
-  protected _concat(values: string[]) {
-    let ret = null;
-
-    if (values && Array.isArray(values)) {
-      const concatted = values
-        .map((value) => {
-          return `"${value}"`;
-        })
-        .join("\n,");
-
-      ret = `[${concatted}]`;
-    }
-
-    return ret;
-  }
-
-  protected stringExists(str: unknown) {
-    return str && (typeof str === "string") && str.trim() !== "";
+  protected buildQuery() {
+    return this.query.replace(
+      /\{\{ return_schema \}\}/g,
+      this.return_schema || "{}",
+    );
   }
 }
