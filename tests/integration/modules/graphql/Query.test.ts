@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { query } from "../../../../src/modules/graphql/Query.ts";
+import { query } from "../../../../src/modules/graphql/arweave.net/Query.ts";
 
 describe("query()", () => {
   describe("tags()", () => {
@@ -14,37 +14,63 @@ describe("query()", () => {
         ])
         .build();
 
-      const expected = `{
-  transactions(
-    sort: HEIGHT_DESC
-    tags: [
-      {
-        name: \"Pushed-For\"
-        values: [\"bgdRvkb_eSrbd3PbrZZ0HhdLgcdu7TYHxIvgNU3E2Ec\"]
-      }
-    ]
+      const expected = `query GetTransactions(
+  $ids: [ID!]
+  $owners: [String!]
+  $recipients: [String!]
+  $tags: [TagFilter!]
+  $bundledIn: [ID!]
+  $block: BlockFilter
+  $first: Int = 10
+  $after: String
+  $sort: SortOrder = HEIGHT_DESC
 ) {
-edges {
-  node {
-    id
-    owner {
-      address
+  transactions(
+    ids: $ids
+    owners: $owners
+    recipients: $recipients
+    tags: $tags
+    bundledIn: $bundledIn
+    block: $block
+    first: $first
+    after: $after
+    sort: $sort
+  ) {
+    
+    pageInfo {
+      hasNextPage
     }
-    block {
-      height
-      timestamp
+    edges {
+      cursor
+      node {
+        id
+        owner {
+          address
+        }
+        block {
+          height
+          timestamp
+        }
+        tags {
+          name
+          value
+        }
+      }
     }
-    tags {
-      name
-      value
-    }
-  }
-  cursor
-}
+
   }
 }`;
 
-      expect(res).toStrictEqual(expected);
+      expect(res.operationName).toStrictEqual(`GetTransactions`);
+      expect(res.query).toStrictEqual(expected);
+      expect(res.variables).toStrictEqual({
+        tags: [
+          {
+            name: "Pushed-For",
+            values: ["bgdRvkb_eSrbd3PbrZZ0HhdLgcdu7TYHxIvgNU3E2Ec"],
+          },
+        ],
+      });
     });
   });
 });
