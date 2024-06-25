@@ -79,5 +79,5 @@ const client = new Client(aoconnect);                  // Create Slick Transacti
     .data("some data")      // Optionally, send data with this message
     .post();                // Send the request (calls HTTP POST under the hood)
 
-  console.log({ newProcess: `https://www.ao.link/entity/${newProcessId}` });
+  console.log({ newProcess: `https://www.ao.link/#/entity/${newProcessId}` });
 })();
