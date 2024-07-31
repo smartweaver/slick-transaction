@@ -94,7 +94,7 @@ export abstract class AbstractTransactionBuilder<Tx extends Transaction = any> {
    */
   tags(tags: Record<string, string> = {}) {
     this.transaction_tags = {
-      ...(this.tags || {}),
+      ...(this.transaction_tags || {}),
       ...tags,
     };
 
