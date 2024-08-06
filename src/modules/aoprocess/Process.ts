@@ -51,7 +51,7 @@ export class Process<Actions extends string = any> {
 
   /**
    * Get the DryRun message request builder for the given action.
-   * 
+   *
    * This method sets `.tags({ Action: action })`, so if you call `.tags()` and
    * overwrite the `Action` tag, then this DryRun message request will use the
    * `Action` you passed in.
