@@ -1,5 +1,6 @@
 import { Client } from "../aoconnect/Client.ts";
 import { AoConnect } from "../aoconnect/interfaces/AoConnect.ts";
+import { DryRun } from "../aoconnect/units/compute/DryRun.ts";
 
 export class Process<Actions extends string = any> {
   protected client: Client;
@@ -49,12 +50,16 @@ export class Process<Actions extends string = any> {
   }
 
   /**
-   * Get DryRun message request builder for the given action.
+   * Get the DryRun message request builder for the given action.
+   * 
+   * This method sets `.tags({ Action: action })`, so if you call `.tags()` and
+   * overwrite the `Action` tag, then this DryRun message request will use the
+   * `Action` you passed in.
    *
    * @param action The name of the action to build the DryRun message for.
    * @returns The DryRun message builder - predefined with this process' ID.
    */
-  dryRun(action: Actions) {
+  dryRun(action: Actions): DryRun {
     return this.client
       .cu()
       .dryRun()
