@@ -1,7 +1,7 @@
 {
   "name": "@smartweaver/slick-transaction",
-  "version": "0.0.9",
-  "versionBuildDate": "20240513.1437",
+  "version": "0.0.13",
+  "versionBuildDate": "20240805.2304",
   "description": "Slick builder APIs for creating Arweave transactions",
   "author": "Eric Crooks <eric.crooks.github@gmail.com> (https://crookse.com)",
   "license": "GPL-3.0",
@@ -9,6 +9,16 @@
     "type": "git",
     "url": "git+ssh://git@github.com/smartweaver/slick-transaction.git"
   },
+  "contributors": [
+    {
+      "name": "Eric Crooks",
+      "url": "https://github.com/crookse"
+    },
+    {
+      "name": "Sean Crooks",
+      "url": "https://github.com/crooks-s"
+    }
+  ],
   "type": "module",
   "devDependencies": {
     "esbuild": "~0.19.10",
@@ -24,10 +34,10 @@
     "blockweave",
     "crypto",
     "dapps",
-    "drashland",
     "framework",
     "http",
     "permanence",
+    "smartweaver",
     "transactions",
     "web3"
   ]

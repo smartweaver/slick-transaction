@@ -1,15 +1,15 @@
 
 # aoconnect
 
-A decorator for the [`@permaweb/aoconnect`](https://www.npmjs.com/package/@permaweb/aoconnect) `aoconnect` object.
+A decorator for the [`@permaweb/aoconnect`](https://www.npmjs.com/package/@permaweb/aoconnect) `aoconnect` interface.
 
 ## Overview
 
-This module wraps (aka decorates) the `aoconnect` object to provide builder pattern APIs around `aoconnect`. This module aims to:
+This module wraps (aka decorates) an `aoconnect` interface to make ao request and message object creation simple. This module aims to:
 
-- Make it easy to understand which ao units handle a given operation
+- Make it easy to [understand which ao units handle a given operation](#idiomatic-apis)
 - Provide reusable and extensible code that works with ao's units at their HTTP endpoints
-- Provide reusable and extensible code that works with the `@permaweb/aoconnect` library
+- Provide reusable and extensible code that works with the `@permaweb/aoconnect` library (or library that matches its interfaces)
 
 Under the hood, this module uses lower level APIs in the [`ao`](./ao.md) module. The `ao` module provides direct HTTP access to ao's units. However, unlike `@permaweb/aoconnect`, it does not (and will not) provide built-ins to handle caching, redirections, and other features that `@permaweb/aoconnect` provides. The `ao` module is intended to be used as low level APIs that should be extended.
 
@@ -243,8 +243,8 @@ const response = await results({
 
 
   process: "1557",
-  from: "cursor,
-  to: "cursor"
+  from: "cursor",
+  to: "cursor",
   sort: "DESC",
   limit: 25,
 });
@@ -274,7 +274,7 @@ const messageId = await message({
 const result = await dryrun({
 
 
-  process: "1557,
+  process: "1557",
   data: "some data",
   tags: [
     { name: "Action", value: "Balance" }

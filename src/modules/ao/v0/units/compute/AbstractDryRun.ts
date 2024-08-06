@@ -7,14 +7,14 @@ export interface DryRun {
    *
    * @param options Options to pass to the request.
    */
-  post(options: PostRequestOptions): Promise<PostResponse>;
+  post(options: PostOptions): Promise<PostResponse>;
 }
 
-export type PostRequestOptions = {
+export type PostOptions = {
   query: {
     "process-id": string;
   };
-};
+} & RequestInit;
 
 export type PostResponse = DryRunResult;
 
@@ -32,5 +32,5 @@ export abstract class AbstractDryRun implements DryRun {
     this.compute_unit = computeUnit;
   }
 
-  abstract post(options: PostRequestOptions): Promise<PostResponse>;
+  abstract post(options: PostOptions): Promise<PostResponse>;
 }

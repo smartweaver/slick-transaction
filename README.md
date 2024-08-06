@@ -19,7 +19,17 @@ The modules below extend Slick Transaction's lower level APIs. These modules are
 | - | - | - |
 | ao        | A clean, idiomatic client for the ao APIs. Methods are written to _closely_ match the ao APIs they target.         | [Docs](./docs/modules/ao.md) | 
 | aoconnect | A decorator for the [`@permaweb/aoconnect`](https://www.npmjs.com/package/@permaweb/aoconnect) `aoconnect` object. | [Docs](./docs/modules/aoconnect.md)
-| aoprocess | An implementation of the above aoconnect decorator module, but strictly made for interacting with processes.       | [Docs](./docs/modules/aoprocess.md)
+| aoprocess | An implementation of the [aoconnect](./docs/modules/aoconnect.md) module, but strictly made for interacting with processes.       | [Docs](./docs/modules/aoprocess.md)
+
+## Why Use This?
+
+### Interoperable
+
+Slick Transaction ships with zero dependencies and can be used in different JavaScript runtimes (e.g., Deno, Bun, Node, Cloudflare).
+
+### Class-Based
+
+All of Slick Transaction's modules use classes to cater to [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming) (OOP). That said, Slick Transaction is for those who prefer OOP, but those who prefer [functional programming](https://en.wikipedia.org/wiki/Functional_programming) can use Slick Transaction as the foundation to build functional programming style software.
 
 ## Examples
 
@@ -111,7 +121,7 @@ const client = new Client(aoconnect);                  // Create Slick Transacti
     .data("some data")      // Optionally, send data with this message
     .post();                // Send the request (calls HTTP POST under the hood)
 
-  console.log({ newProcess: `https://www.ao.link/entity/${newProcessId}` });
+  console.log({ newProcess: `https://www.ao.link/#/entity/${newProcessId}` });
 })();
 
 ```

@@ -4,7 +4,7 @@ export type UnitInfo = {
    * query block explorers. For example, the following link queries the
    * aolink block explorer for the address:
    *
-   * https://www.ao.link/entity/fcoN_xJeisVsPXA-trzVAuIiqO3ydLQxM-L4XbrQKzY
+   * https://www.ao.link/#/entity/fcoN_xJeisVsPXA-trzVAuIiqO3ydLQxM-L4XbrQKzY
    */
   address: string;
 

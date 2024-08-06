@@ -9,6 +9,7 @@ tmp/
 # Files
 .DS_Store
 *.log*
+*.tmp.*
 *wallet.*
 logs
 

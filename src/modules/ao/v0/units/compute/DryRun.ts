@@ -1,9 +1,5 @@
 import { hasParams, kvpToQueryParamsString } from "../../utils/FetchUtils.ts";
-import {
-  AbstractDryRun,
-  PostRequestOptions,
-  PostResponse,
-} from "./AbstractDryRun.ts";
+import { AbstractDryRun, PostOptions, PostResponse } from "./AbstractDryRun.ts";
 
 export class DryRun extends AbstractDryRun {
   /**
@@ -24,9 +20,20 @@ export class DryRun extends AbstractDryRun {
    * ```
    */
   post(
-    options: PostRequestOptions,
+    options: PostOptions,
   ): Promise<PostResponse> {
     const result = hasParams(options?.query, ["process-id"]);
+
+    const fetchOptions = {
+      ...(options || {}),
+      headers: {
+        "content-type": "application/json",
+        "accept": "application/json",
+        ...(options.headers || {}),
+      },
+      redirect: options.redirect || "follow",
+      method: "POST",
+    };
 
     if (result.has_missing_params) {
       throw new Error(
@@ -37,7 +44,7 @@ export class DryRun extends AbstractDryRun {
     const queryString = kvpToQueryParamsString(options?.query);
 
     return this.compute_unit
-      .fetch(`/dry-run?${queryString}`)
+      .fetch(`/dry-run${queryString}`, fetchOptions)
       .then((res) => res.json());
   }
 }
