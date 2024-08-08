@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+(
+  cd tests/integration/modules/aoconnect
+  pnpm install
+  cd -
+
+  cd tests/integration/standard/with-arweave-js
+  pnpm install
+  cd -
+
+  pnpm vitest $@
+)
