@@ -7,7 +7,7 @@ const expectedSdkName = "@smartweaver/slick-transaction";
 const expectedSdkVersion = packageJson.version + "-" +
   packageJson.versionBuildDate;
 
-// We do not want to send an actual request through aoconnect, so we return the 
+// We do not want to send an actual request through aoconnect, so we return the
 // args that would be sent to aoconnect's APIs and verify those
 vi.mock("@permaweb/aoconnect", () => {
   return {
@@ -39,14 +39,13 @@ const dSigner = () => {
   return "some-data-item-signer";
 };
 
-const token = new TokenProcess(aoconnect, "MyProcessId1337")
+const token = new TokenProcess(aoconnect, "MyProcessId1337");
 
 describe("TokenProcess", () => {
-
   test("balance()", async () => {
     const result = await token
       .balance("some-target-address")
-      .post()
+      .post();
 
     expect(result).toStrictEqual([
       {
@@ -64,7 +63,7 @@ describe("TokenProcess", () => {
   test("balances()", async () => {
     const result = await token
       .balances()
-      .post()
+      .post();
 
     expect(result).toStrictEqual([
       {
@@ -82,13 +81,13 @@ describe("TokenProcess", () => {
     const result = await token
       .burn(
         "some-target",
-        "670000000000000"
+        "670000000000000",
       )
       .tags({
         "X-Some-Tag": "some-tag-value",
       })
       .dataItemSigner(dSigner)
-      .post()
+      .post();
 
     expect(result).toStrictEqual([
       {
@@ -110,13 +109,13 @@ describe("TokenProcess", () => {
     const result = await token
       .mint(
         "some-target",
-        "670000000000000"
+        "670000000000000",
       )
       .tags({
         "X-Some-Tag": "some-tag-value",
       })
       .dataItemSigner(dSigner)
-      .post()
+      .post();
 
     expect(result).toStrictEqual([
       {
@@ -138,13 +137,13 @@ describe("TokenProcess", () => {
     const result = await token
       .transfer(
         "some-target",
-        "670000000000000"
+        "670000000000000",
       )
       .tags({
         "X-Some-Tag": "some-tag-value",
       })
       .dataItemSigner(dSigner)
-      .post()
+      .post();
 
     expect(result).toStrictEqual([
       {
