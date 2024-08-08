@@ -2,8 +2,8 @@ import { DryRun as CuDryRun } from "../aoconnect/units/compute/DryRun.ts";
 import { Message as MuMessage } from "../aoconnect/units/messenger/Message.ts";
 import { Process } from "./Process.ts";
 
-type Message = Omit<MuMessage, "process">
-type DryRun = Omit<CuDryRun, "process">
+type Message = Omit<MuMessage, "process">;
+type DryRun = Omit<CuDryRun, "process">;
 
 export type TokenActions =
   | "Balance"
@@ -27,7 +27,7 @@ export class TokenProcess<
       .dryRun("Balance")
       .tags({
         Target: target,
-      })
+      });
   }
 
   /**
@@ -37,7 +37,7 @@ export class TokenProcess<
    */
   balances(): DryRun {
     return this
-      .dryRun("Balances")
+      .dryRun("Balances");
   }
 
   /**
