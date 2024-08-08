@@ -1,5 +1,10 @@
 import { QueryBuilderOptions } from "../types/QueryBuilderOptions.ts";
-import { QueryTransactionsArgs, TagFilter } from "../types/Schema.ts";
+import {
+  QueryTransactionArgs,
+  QueryTransactionsArgs,
+  SortOrder,
+  TagFilter,
+} from "../types/Schema.ts";
 import { AbstractQueryBuilder } from "./AbstractQueryBuilder.ts";
 
 const GetTransactionsOperations = `query GetTransactions(
@@ -58,20 +63,28 @@ export class TransactionsQueryBuilder
     }
 `);
   }
-
   /**
    * @returns `this` instance for further method chaining.
    */
-  first(first: number) {
-    this.operation_variables.first = first;
+  after(value: QueryTransactionsArgs["after"]) {
+    if (this.isNullOrUndefined(value)) {
+      return this;
+    }
+
+    this.operation_variables.after = value;
     return this;
   }
 
-  /**
-   * @returns `this` instance for further method chaining.
-   */
-  after(after: string) {
-    this.operation_variables.after = after;
+  block(value: QueryTransactionsArgs["block"]) {
+    if (this.isNullOrUndefined(value?.max)) {
+      return this;
+    }
+
+    if (this.isNullOrUndefined(value?.min)) {
+      return this;
+    }
+
+    this.operation_variables.block = value;
     return this;
   }
 
@@ -86,26 +99,72 @@ export class TransactionsQueryBuilder
   /**
    * @returns `this` instance for further method chaining.
    */
-  ids(ids: string[]) {
-    this.operation_variables.ids = ids;
+  bundledIn(value: QueryTransactionsArgs["bundledIn"]) {
+    if (this.isEmptyArray(value)) {
+      return this;
+    }
 
+    this.operation_variables.bundledIn = value;
     return this;
   }
 
   /**
    * @returns `this` instance for further method chaining.
    */
-  owners(owners: string[]) {
-    this.operation_variables.owners = owners;
+  first(value: QueryTransactionsArgs["first"]) {
+    if (this.isNullOrUndefined(value)) {
+      return this;
+    }
 
+    this.operation_variables.first = value;
     return this;
   }
 
   /**
    * @returns `this` instance for further method chaining.
    */
-  recipients(recipients: string[]) {
-    this.operation_variables.recipients = recipients;
+  ids(value: QueryTransactionsArgs["ids"]) {
+    if (this.isEmptyArray(value)) {
+      return this;
+    }
+
+    this.operation_variables.ids = value;
+    return this;
+  }
+
+  /**
+   * @returns `this` instance for further method chaining.
+   */
+  owners(value: QueryTransactionsArgs["owners"]) {
+    if (this.isEmptyArray(value)) {
+      return this;
+    }
+
+    this.operation_variables.owners = value;
+    return this;
+  }
+
+  /**
+   * @returns `this` instance for further method chaining.
+   */
+  recipients(value: QueryTransactionsArgs["recipients"]) {
+    if (this.isEmptyArray(value)) {
+      return this;
+    }
+
+    this.operation_variables.recipients = value;
+    return this;
+  }
+
+  /**
+   * @returns `this` instance for further method chaining.
+   */
+  sort(value: QueryTransactionsArgs["sort"]) {
+    if (value !== SortOrder.HeightAsc && value !== SortOrder.HeightDesc) {
+      return this;
+    }
+
+    this.operation_variables.sort = value;
     return this;
   }
 
@@ -114,8 +173,12 @@ export class TransactionsQueryBuilder
    * @param tags The tags in question.
    * @returns `this` instance for further method chaining.
    */
-  tags(tags: TagFilter[]) {
-    this.operation_variables.tags = tags;
+  tags(value: QueryTransactionsArgs["tags"]) {
+    if (this.isEmptyArray(value)) {
+      return this;
+    }
+
+    this.operation_variables.tags = value;
     return this;
   }
 }

@@ -1,5 +1,5 @@
 import { QueryBuilderOptions } from "../types/QueryBuilderOptions.ts";
-import { QueryTransactionsArgs } from "../types/Schema.ts";
+import { QueryTransactionsArgs, SortOrder } from "../types/Schema.ts";
 import { AbstractQueryBuilder } from "./AbstractQueryBuilder.ts";
 
 export const GetTransactionsOperation = `query GetTransactions(
@@ -70,6 +70,31 @@ export class TransactionsQueryBuilder
     this.returnSchema(options.return_schema || ReturnSchema);
   }
 
+  /**
+   * @returns `this` instance for further method chaining.
+   */
+  after(value: QueryTransactionsArgs["after"]) {
+    if (this.isNullOrUndefined(value)) {
+      return this;
+    }
+
+    this.operation_variables.after = value;
+    return this;
+  }
+
+  block(value: QueryTransactionsArgs["block"]) {
+    if (this.isNullOrUndefined(value?.max)) {
+      return this;
+    }
+
+    if (this.isNullOrUndefined(value?.min)) {
+      return this;
+    }
+
+    this.operation_variables.block = value;
+    return this;
+  }
+
   build() {
     if (this.operation_variables.after) {
       this.return_schema = this.return_schema.replace(/count/g, "");
@@ -87,21 +112,12 @@ export class TransactionsQueryBuilder
   /**
    * @returns `this` instance for further method chaining.
    */
-  after(value: QueryTransactionsArgs["after"]) {
-    this.operation_variables.after = value;
-    return this;
-  }
-
-  block(value: QueryTransactionsArgs["block"]) {
-    this.operation_variables.block = value;
-  }
-
-  /**
-   * @returns `this` instance for further method chaining.
-   */
   bundledIn(value: QueryTransactionsArgs["bundledIn"]) {
-    this.operation_variables.bundledIn = value;
+    if (this.isEmptyArray(value)) {
+      return this;
+    }
 
+    this.operation_variables.bundledIn = value;
     return this;
   }
 
@@ -109,6 +125,10 @@ export class TransactionsQueryBuilder
    * @returns `this` instance for further method chaining.
    */
   first(value: QueryTransactionsArgs["first"]) {
+    if (this.isNullOrUndefined(value)) {
+      return this;
+    }
+
     this.operation_variables.first = value;
     return this;
   }
@@ -117,8 +137,11 @@ export class TransactionsQueryBuilder
    * @returns `this` instance for further method chaining.
    */
   ids(value: QueryTransactionsArgs["ids"]) {
-    this.operation_variables.ids = value;
+    if (this.isEmptyArray(value)) {
+      return this;
+    }
 
+    this.operation_variables.ids = value;
     return this;
   }
 
@@ -126,8 +149,11 @@ export class TransactionsQueryBuilder
    * @returns `this` instance for further method chaining.
    */
   owners(value: QueryTransactionsArgs["owners"]) {
-    this.operation_variables.owners = value;
+    if (this.isEmptyArray(value)) {
+      return this;
+    }
 
+    this.operation_variables.owners = value;
     return this;
   }
 
@@ -135,6 +161,10 @@ export class TransactionsQueryBuilder
    * @returns `this` instance for further method chaining.
    */
   recipients(value: QueryTransactionsArgs["recipients"]) {
+    if (this.isEmptyArray(value)) {
+      return this;
+    }
+
     this.operation_variables.recipients = value;
     return this;
   }
@@ -143,6 +173,10 @@ export class TransactionsQueryBuilder
    * @returns `this` instance for further method chaining.
    */
   sort(value: QueryTransactionsArgs["sort"]) {
+    if (value !== SortOrder.HeightAsc && value !== SortOrder.HeightDesc) {
+      return this;
+    }
+
     this.operation_variables.sort = value;
     return this;
   }
@@ -151,6 +185,10 @@ export class TransactionsQueryBuilder
    * @returns `this` instance for further method chaining.
    */
   tags(value: QueryTransactionsArgs["tags"]) {
+    if (this.isEmptyArray(value)) {
+      return this;
+    }
+
     this.operation_variables.tags = value;
     return this;
   }
