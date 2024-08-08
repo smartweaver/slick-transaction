@@ -1,4 +1,4 @@
-import { TransactionConnection, TransactionEdge } from "../types/Schema.ts";
+import { TransactionEdge } from "../types/Schema.ts";
 import { TransactionConnectionResponse } from "../types/Types.ts";
 
 export class TransactionEdgesDecorator {

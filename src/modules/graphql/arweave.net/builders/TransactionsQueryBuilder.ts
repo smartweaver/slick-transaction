@@ -1,9 +1,7 @@
 import { QueryBuilderOptions } from "../types/QueryBuilderOptions.ts";
 import {
-  QueryTransactionArgs,
   QueryTransactionsArgs,
   SortOrder,
-  TagFilter,
 } from "../types/Schema.ts";
 import { AbstractQueryBuilder } from "./AbstractQueryBuilder.ts";
 
