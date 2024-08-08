@@ -1,8 +1,5 @@
 import { QueryBuilderOptions } from "../types/QueryBuilderOptions.ts";
-import {
-  QueryTransactionsArgs,
-  SortOrder,
-} from "../types/Schema.ts";
+import { QueryTransactionsArgs, SortOrder } from "../types/Schema.ts";
 import { AbstractQueryBuilder } from "./AbstractQueryBuilder.ts";
 
 const GetTransactionsOperations = `query GetTransactions(
