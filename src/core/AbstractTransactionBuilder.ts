@@ -93,9 +93,13 @@ export abstract class AbstractTransactionBuilder<Tx extends Transaction = any> {
    * @returns `this` instance for further method chaining.
    */
   tags(tags: Record<string, string> = {}) {
+    const currentTags = this.transaction_tags || {};
+    const actionTag = currentTags?.Action;
+
     this.transaction_tags = {
-      ...(this.transaction_tags || {}),
-      ...tags,
+      ...currentTags, // Keep the current tags
+      ...(tags || {}), // Overwrite the current tags if any
+      ...(actionTag ? { Action: actionTag } : {}), // Keep the Action tag if any
     };
 
     return this;

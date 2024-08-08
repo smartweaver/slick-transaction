@@ -1,4 +1,9 @@
+import { DryRun as CuDryRun } from "../aoconnect/units/compute/DryRun.ts";
+import { Message as MuMessage } from "../aoconnect/units/messenger/Message.ts";
 import { Process } from "./Process.ts";
+
+type Message = Omit<MuMessage, "process">;
+type DryRun = Omit<CuDryRun, "process">;
 
 export type TokenActions =
   | "Balance"
@@ -15,27 +20,24 @@ export class TokenProcess<
    * Send a `Action = "Balance"` message.
    *
    * @param target The target balance in question.
-   * @returns The balance result.
+   * @returns The action builder. You can call `.post()` on it to send it.
    */
-  balance(target: string) {
+  balance(target: string): DryRun {
     return this
-      .action("Balance")
+      .dryRun("Balance")
       .tags({
         Target: target,
-      })
-      .post();
+      });
   }
 
   /**
    * Send a `Action = "Balances"` message.
    *
-   * @param target The target balance in question.
-   * @returns The balances result.
+   * @returns The action builder. You can call `.post()` on it to send it.
    */
-  balances() {
+  balances(): DryRun {
     return this
-      .action("Balances")
-      .post();
+      .dryRun("Balances");
   }
 
   /**
@@ -79,7 +81,7 @@ export class TokenProcess<
    */
   info() {
     return this
-      .action("Info")
+      .dryRun("Info")
       .post();
   }
 
@@ -108,7 +110,7 @@ export class TokenProcess<
    * // - end of example -
    * ```
    */
-  mint(target: string, quantity: string) {
+  mint(target: string, quantity: string): Message {
     return this
       .action("Mint")
       .tags({
