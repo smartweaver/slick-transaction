@@ -122,4 +122,32 @@ export abstract class AbstractQueryBuilder<Variables> {
       this.return_schema || "{}",
     );
   }
+
+  protected isNullOrUndefined(value: unknown): boolean {
+    if (value === undefined) {
+      return true;
+    }
+
+    if (value === null) {
+      return true;
+    }
+
+    return false;
+  }
+
+  protected isEmptyArray(value: unknown): boolean {
+    if (this.isNullOrUndefined(value)) {
+      return true;
+    }
+
+    if (!Array.isArray(value)) {
+      return true;
+    }
+
+    if (value.length <= 0) {
+      return true;
+    }
+
+    return false;
+  }
 }
