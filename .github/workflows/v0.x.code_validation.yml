@@ -77,12 +77,4 @@ jobs:
 
       - name: Run Tests
         run: |
-          cd tests/integration/modules/aoconnect
-          pnpm install
-          cd -
-
-          cd tests/integration/standard/with-arweave-js
-          pnpm install
-          cd -
-
-          deno task test:unit --no-watch
+          deno task test --no-watch

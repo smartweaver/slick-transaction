@@ -1,23 +1,14 @@
 import { QueryBuilderOptions } from "../types/QueryBuilderOptions.ts";
 
 export abstract class AbstractQueryBuilder<Variables> {
-  protected abstract query: string;
+  protected abstract operation: string;
 
   protected server_url: string;
   protected operation_variables: Partial<Variables> = {};
   protected return_schema: string;
 
   constructor(options: QueryBuilderOptions) {
-    this.server_url = options?.server_url || "https://arweave.net/graphql";
-  }
-
-  variables(variables: Variables) {
-    this.operation_variables = {
-      ...(this.operation_variables || {}),
-      ...(variables || {}),
-    };
-
-    return this;
+    this.server_url = options.server_url;
   }
 
   /**
@@ -30,12 +21,21 @@ export abstract class AbstractQueryBuilder<Variables> {
     variables: Partial<Variables>;
   };
 
+  variables(variables: Variables) {
+    this.operation_variables = {
+      ...(this.operation_variables || {}),
+      ...(variables || {}),
+    };
+
+    return this;
+  }
+
   /**
    * Make a `fetch` request to the GraphQL server.
    * @param options `RequestInit` options and an optional `url` option. If no
    * `url` option is provided, then the `server_url` provided in the `options`
    * will be used. If no `server_url` is provided, then the default server URL
-   * `https://arweave.net/graphql` will be used.
+   * will be used.
    * @returns The response to the request.
    */
   post(
@@ -51,7 +51,7 @@ export abstract class AbstractQueryBuilder<Variables> {
       cache: "no-store",
       headers: {
         "content-type": "application/json",
-        "accpet": "application/json, text/plain, */*",
+        "accept": "application/json, text/plain, */*",
       },
       ...(options || {}),
       body: JSON.stringify(query),
@@ -70,45 +70,9 @@ export abstract class AbstractQueryBuilder<Variables> {
   }
 
   /**
-   * Set the value to return.
+   * Set the value to return from the GraphQL query.
    * @param returnValue
    * @returns `this` instance for further method chaining.
-   * @example
-   * ```ts
-   * import { query } from "@smartweaver/slick-transaction/modules/graphql/Client";
-   *
-   * const res = await query()
-   *   .returnSchema({
-   *     schema: `
-   *       edges {
-   *         node {
-   *           id
-   *           recipient
-   *           block {
-   *             height
-   *             timestamp
-   *           }
-   *           tags {
-   *             name
-   *             value
-   *           }
-   *         }
-   *         cursor
-   *       }
-   *     `,
-   *     fields: {
-   *       tags: (tags: ({ name, value }) => {
-   *       },
-   *       recipient: (value: string) => {
-   *         if (value === "YrmlhY6i0uedj0gRgvLzuL-UgIQEUfEw6ojWLYtSkXs") {
-   *           return "My Token Process"
-   *         }
-   *
-   *         return value;
-   *       }
-   *     }
-   *   })
-   *   .post();
    * ```
    */
   returnSchema(schema?: string) {
@@ -116,11 +80,16 @@ export abstract class AbstractQueryBuilder<Variables> {
     return this;
   }
 
+  /**
+   * @returns The `query` field of the `POST` request body.
+   */
   protected buildQuery() {
-    return this.query.replace(
+    const ret = this.operation.replace(
       /\{\{ return_schema \}\}/g,
-      this.return_schema || "{}",
+      this.return_schema,
     );
+
+    return ret;
   }
 
   protected isNullOrUndefined(value: unknown): boolean {

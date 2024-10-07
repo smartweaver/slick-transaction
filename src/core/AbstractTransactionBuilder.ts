@@ -31,25 +31,6 @@ export abstract class AbstractTransactionBuilder<Tx extends Transaction = any> {
   }
 
   /**
-   * Set the transaction's attributes using the given attributes. This method
-   * exists to set attributes in one go as opposed to doing it with chained
-   * methods. An example use case is if a transaction is received in JSON fromat
-   * and can be used to set most of the fields in this builder. Instead of
-   * adding the fields one by one with chained methods, it can be done using
-   * this single method.
-   * @param attributes The transaction attributes in question.
-   * @returns `this` instance for further method chaining.
-   */
-  attributes(attributes: Partial<Tx> = {}) {
-    this.transaction = {
-      ...this.transaction,
-      ...attributes,
-    };
-
-    return this;
-  }
-
-  /**
    * Build the transaction.
    * @returns The built transaction.
    */
@@ -93,9 +74,13 @@ export abstract class AbstractTransactionBuilder<Tx extends Transaction = any> {
    * @returns `this` instance for further method chaining.
    */
   tags(tags: Record<string, string> = {}) {
+    const currentTags = this.transaction_tags || {};
+    const actionTag = currentTags?.Action;
+
     this.transaction_tags = {
-      ...(this.transaction_tags || {}),
-      ...tags,
+      ...currentTags, // Keep the current tags
+      ...(tags || {}), // Overwrite the current tags if any
+      ...(actionTag ? { Action: actionTag } : {}), // Keep the Action tag if any
     };
 
     return this;

@@ -2,40 +2,33 @@ import { QueryBuilderOptions } from "../types/QueryBuilderOptions.ts";
 import { QueryTransactionsArgs, SortOrder } from "../types/Schema.ts";
 import { AbstractQueryBuilder } from "./AbstractQueryBuilder.ts";
 
-const GetTransactionsOperations = `query GetTransactions(
+export const GetTransactionsOperation = `query GetTransactions(
+  $after: String
+  $block: RangeFilter
+  $bundledIn: [ID!]
+  $first: Int = 10
   $ids: [ID!]
   $owners: [String!]
   $recipients: [String!]
+  $sortOrder: SortOrder = HEIGHT_DESC
   $tags: [TagFilter!]
-  $bundledIn: [ID!]
-  $block: BlockFilter
-  $first: Int = 10
-  $after: String
-  $sort: SortOrder = HEIGHT_DESC
 ) {
   transactions(
+    after: $after
+    block: $block,
+    bundledIn: $bundledIn
+    first: $first
     ids: $ids
     owners: $owners
     recipients: $recipients
+    sort: $sortOrder,
     tags: $tags
-    bundledIn: $bundledIn
-    block: $block
-    first: $first
-    after: $after
-    sort: $sort
   ) {
     {{ return_schema }}
   }
 }`;
 
-export class TransactionsQueryBuilder
-  extends AbstractQueryBuilder<QueryTransactionsArgs> {
-  query = GetTransactionsOperations;
-
-  constructor(options?: QueryBuilderOptions) {
-    super(options);
-
-    this.returnSchema(`
+export const ReturnSchema = `
     pageInfo {
       hasNextPage
     }
@@ -46,18 +39,37 @@ export class TransactionsQueryBuilder
         owner {
           address
         }
+        recipient
         block {
-          height
           timestamp
+          height
+          __typename
         }
+        ingested_at
         tags {
           name
           value
+          __typename
         }
+        __typename
       }
+      __typename
     }
-`);
+    __typename
+`;
+
+export class TransactionsQueryBuilder
+  extends AbstractQueryBuilder<QueryTransactionsArgs> {
+  protected operation: string;
+
+  constructor(options?: QueryBuilderOptions) {
+    super(options);
+
+    this.operation = options.operation || GetTransactionsOperation;
+
+    this.returnSchema(options.return_schema || ReturnSchema);
   }
+
   /**
    * @returns `this` instance for further method chaining.
    */
@@ -84,9 +96,15 @@ export class TransactionsQueryBuilder
   }
 
   build() {
+    if (this.operation_variables.after) {
+      this.return_schema = this.return_schema.replace(/count/g, "");
+    }
+
+    const query = this.buildQuery();
+
     return {
       operationName: `GetTransactions`,
-      query: this.buildQuery(),
+      query,
       variables: this.operation_variables,
     };
   }
@@ -164,8 +182,6 @@ export class TransactionsQueryBuilder
   }
 
   /**
-   * Set the tags to send with the query.
-   * @param tags The tags in question.
    * @returns `this` instance for further method chaining.
    */
   tags(value: QueryTransactionsArgs["tags"]) {
