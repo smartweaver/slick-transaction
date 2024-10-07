@@ -24,7 +24,7 @@ version-resolver:
     labels:
       - 'release-patch'
       - 'release-chore' # allow our chore PRs to just be patches too
-  default: release-patch
+  default: patch
 
 # What our Release Summary will look like. If no draft has been created, then
 # this will be used, otherwise $CHANGES just gets addedd.
