@@ -1,5 +1,5 @@
+import { QueryTransactionArgs } from "../../../../standard/grahpql/types/Schema.ts";
 import { QueryBuilderOptions } from "../types/QueryBuilderOptions.ts";
-import { QueryTransactionArgs } from "../types/Schema.ts";
 import { AbstractQueryBuilder } from "./AbstractQueryBuilder.ts";
 
 const GetTransactionOperation = `query GetTransaction(
@@ -17,20 +17,6 @@ export class TransactionQueryBuilder
 
   constructor(options?: QueryBuilderOptions) {
     super(options);
-    this.returnSchema(`
-    id
-    owner {
-      address
-    }
-    block {
-      height
-      timestamp
-    }
-    tags {
-      name
-      value
-    }
-`);
   }
 
   build() {

@@ -27,7 +27,7 @@ export type Scalars = {
 
 export type Query = {
   __typename?: "Query";
-  transaction?: Maybe<Transaction>;
+  transaction?: Maybe<TransactionEdgeNode>;
   transactions: TransactionConnection;
   block?: Maybe<Block>;
   blocks: BlockConnection;
@@ -89,16 +89,20 @@ export type BlockEdge = {
   node: Block;
 };
 
-export type TransactionConnection = {
+export type TransactionConnection<
+  TxEdge extends TransactionEdge = TransactionEdge,
+> = {
   __typename?: "TransactionConnection";
   pageInfo: PageInfo;
-  edges: Array<TransactionEdge>;
+  edges: Array<TxEdge>;
 };
 
-export type TransactionEdge = {
+export type TransactionEdge<
+  TxNode extends TransactionEdgeNode = TransactionEdgeNode,
+> = {
   __typename?: "TransactionEdge";
   cursor: Scalars["String"]["output"];
-  node: Transaction;
+  node: TxNode;
 };
 
 export type PageInfo = {
@@ -106,7 +110,7 @@ export type PageInfo = {
   hasNextPage: Scalars["Boolean"]["output"];
 };
 
-export type Transaction = {
+export type TransactionEdgeNode = {
   __typename?: "Transaction";
   id: Scalars["ID"]["output"];
   anchor: Scalars["String"]["output"];
@@ -118,14 +122,7 @@ export type Transaction = {
   data: MetaData;
   tags: Array<Tag>;
   block?: Maybe<Block>;
-  /** @deprecated Use `bundledIn` */
-  parent?: Maybe<Parent>;
   bundledIn?: Maybe<Bundle>;
-};
-
-export type Parent = {
-  __typename?: "Parent";
-  id: Scalars["ID"]["output"];
 };
 
 export type Bundle = {

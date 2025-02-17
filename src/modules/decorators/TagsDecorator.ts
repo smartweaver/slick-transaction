@@ -1,6 +1,6 @@
 import { Transaction } from "../../core/interfaces/Transaction.ts";
 
-export class Tags {
+export class TagsDecorator {
   #wrappee: Transaction["tags"];
 
   constructor(tags: Transaction["tags"]) {
@@ -60,6 +60,11 @@ export class Tags {
   }
 }
 
+/**
+ * @deprecated on 2025-02-16. Use `TagsDecorator` class.
+ */
+export class Tags extends TagsDecorator {}
+
 export function tags(tags: Transaction["tags"]) {
-  return new Tags(tags || []);
+  return new TagsDecorator(tags || []);
 }

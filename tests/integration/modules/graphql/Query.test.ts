@@ -15,48 +15,54 @@ describe("query()", () => {
         .build();
 
       const expected = `query GetTransactions(
+  $after: String
+  $block: BlockFilter
+  $bundledIn: [ID!]
+  $first: Int = 10
   $ids: [ID!]
   $owners: [String!]
   $recipients: [String!]
-  $tags: [TagFilter!]
-  $bundledIn: [ID!]
-  $block: BlockFilter
-  $first: Int = 10
-  $after: String
   $sort: SortOrder = HEIGHT_DESC
+  $tags: [TagFilter!]
 ) {
   transactions(
+    after: $after
+    block: $block
+    bundledIn: $bundledIn
+    first: $first
     ids: $ids
     owners: $owners
     recipients: $recipients
-    tags: $tags
-    bundledIn: $bundledIn
-    block: $block
-    first: $first
-    after: $after
     sort: $sort
+    tags: $tags
   ) {
     
-    pageInfo {
-      hasNextPage
-    }
-    edges {
-      cursor
-      node {
-        id
-        owner {
-          address
-        }
-        block {
-          height
-          timestamp
-        }
-        tags {
-          name
-          value
+      pageInfo {
+        hasNextPage
+      }
+      edges {
+        cursor
+        node {
+          id
+          owner {
+            address
+          }
+          recipient
+          quantity {
+            ar
+            winston
+          }
+          block {
+            timestamp
+            height
+          }
+          ingested_at
+          tags {
+            name
+            value
+          }
         }
       }
-    }
 
   }
 }`;

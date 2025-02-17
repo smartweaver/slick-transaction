@@ -3,14 +3,14 @@ import { QueryTransactionsArgs, SortOrder } from "../types/Schema.ts";
 import { AbstractQueryBuilder } from "./AbstractQueryBuilder.ts";
 
 export const GetTransactionsOperation = `query GetTransactions(
-  $after: String
-  $block: RangeFilter
-  $bundledIn: [ID!]
-  $first: Int = 10
-  $ids: [ID!]
-  $owners: [String!]
-  $recipients: [String!]
-  $sortOrder: SortOrder = HEIGHT_DESC
+  $after: String,
+  $block: RangeFilter,
+  $bundledIn: [ID!],
+  $first: Int = 25,
+  $ids: [ID!],
+  $owners: [String!],
+  $recipients: [String!],
+  $sortOrder: SortOrder = INGESTED_AT_DESC,
   $tags: [TagFilter!]
 ) {
   transactions(
@@ -28,34 +28,8 @@ export const GetTransactionsOperation = `query GetTransactions(
   }
 }`;
 
-export const ReturnSchema = `
-    pageInfo {
-      hasNextPage
-    }
-    edges {
-      cursor
-      node {
-        id
-        owner {
-          address
-        }
-        recipient
-        block {
-          timestamp
-          height
-          __typename
-        }
-        ingested_at
-        tags {
-          name
-          value
-          __typename
-        }
-        __typename
-      }
-      __typename
-    }
-    __typename
+export const ReturnSchema =
+  `pageInfo { hasNextPage } edges { cursor, node { id, owner, { address }, recipient, data { type, size }, block { height, timestamp }, quantity { ar, winston }, fee { ar, winston }, tags { name, value }, } } __typename } 
 `;
 
 export class TransactionsQueryBuilder

@@ -1,28 +1,31 @@
+import {
+  QueryTransactionsArgs,
+  SortOrder,
+} from "../../../../standard/grahpql/types/Schema.ts";
 import { QueryBuilderOptions } from "../types/QueryBuilderOptions.ts";
-import { QueryTransactionsArgs, SortOrder } from "../types/Schema.ts";
 import { AbstractQueryBuilder } from "./AbstractQueryBuilder.ts";
 
 const GetTransactionsOperations = `query GetTransactions(
+  $after: String
+  $block: BlockFilter
+  $bundledIn: [ID!]
+  $first: Int = 10
   $ids: [ID!]
   $owners: [String!]
   $recipients: [String!]
-  $tags: [TagFilter!]
-  $bundledIn: [ID!]
-  $block: BlockFilter
-  $first: Int = 10
-  $after: String
   $sort: SortOrder = HEIGHT_DESC
+  $tags: [TagFilter!]
 ) {
   transactions(
+    after: $after
+    block: $block
+    bundledIn: $bundledIn
+    first: $first
     ids: $ids
     owners: $owners
     recipients: $recipients
-    tags: $tags
-    bundledIn: $bundledIn
-    block: $block
-    first: $first
-    after: $after
     sort: $sort
+    tags: $tags
   ) {
     {{ return_schema }}
   }
@@ -36,26 +39,32 @@ export class TransactionsQueryBuilder
     super(options);
 
     this.returnSchema(`
-    pageInfo {
-      hasNextPage
-    }
-    edges {
-      cursor
-      node {
-        id
-        owner {
-          address
-        }
-        block {
-          height
-          timestamp
-        }
-        tags {
-          name
-          value
+      pageInfo {
+        hasNextPage
+      }
+      edges {
+        cursor
+        node {
+          id
+          owner {
+            address
+          }
+          recipient
+          quantity {
+            ar
+            winston
+          }
+          block {
+            timestamp
+            height
+          }
+          ingested_at
+          tags {
+            name
+            value
+          }
         }
       }
-    }
 `);
   }
   /**
@@ -174,6 +183,7 @@ export class TransactionsQueryBuilder
     }
 
     this.operation_variables.tags = value;
+
     return this;
   }
 }

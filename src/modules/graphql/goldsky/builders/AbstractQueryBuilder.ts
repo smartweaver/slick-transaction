@@ -47,16 +47,25 @@ export abstract class AbstractQueryBuilder<Variables> {
       options.url = this.server_url;
     }
 
-    const req = fetch(options.url, {
-      cache: "no-store",
+    if (!options.body) {
+      options.body = JSON.stringify(query);
+    }
+
+    const allOptions = {
+      // cache: "no-store",
+      ...(options || {}),
       headers: {
         "content-type": "application/json",
-        "accept": "application/json, text/plain, */*",
+        "accept": "*/*",
+        ...(options?.headers || {}),
       },
-      ...(options || {}),
-      body: JSON.stringify(query),
       method: "POST",
-    });
+    };
+
+    // @ts-ignore
+    allOptions.headers.referer = "";
+
+    const req = fetch(options.url, allOptions);
 
     // @ts-ignore Add .graph
     return req
