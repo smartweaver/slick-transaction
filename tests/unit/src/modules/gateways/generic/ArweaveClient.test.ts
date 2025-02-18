@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
-import { ArweaveClient } from "../../../../../src/modules/gateways/generic/ArweaveClient.ts";
-import { ArweaveGateway } from "../../../../../src/modules/gateways/generic/ArweaveGateway.ts";
+import { ArweaveClient } from "../../../../../../src/modules/gateways/generic/ArweaveClient.ts";
+import { ArweaveGateway } from "../../../../../../src/modules/gateways/generic/ArweaveGateway.ts";
 
 describe("gateway()", () => {
   test("returns a gateway instance", async () => {

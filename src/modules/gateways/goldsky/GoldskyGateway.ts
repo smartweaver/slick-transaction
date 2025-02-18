@@ -1,3 +1,5 @@
+import { GoldskyGraphQlClient } from "./GoldskyGraphQlClient.ts";
+
 class GoldskyGatewayTypeError extends TypeError {}
 
 export class GoldskyGateway {
@@ -16,7 +18,13 @@ export class GoldskyGateway {
     this.base_url = baseUrl;
   }
 
+  get configs() {
+    return {
+      base_url: this.base_url,
+    };
+  }
+
   graphql() {
-    return;
+    return new GoldskyGraphQlClient(this.base_url);
   }
 }

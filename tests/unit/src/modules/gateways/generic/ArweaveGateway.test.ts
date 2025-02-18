@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { ArweaveGateway } from "../../../../../src/modules/gateways/generic/ArweaveGateway.ts";
-import { ArweaveGraphQlClient } from "../../../../../src/modules/gateways/generic/ArweaveGraphQlClient.ts";
+import { ArweaveGateway } from "../../../../../../src/modules/gateways/generic/ArweaveGateway.ts";
+import { ArweaveGraphQlClient } from "../../../../../../src/modules/gateways/generic/ArweaveGraphQlClient.ts";
 
 //
 // NOTE
