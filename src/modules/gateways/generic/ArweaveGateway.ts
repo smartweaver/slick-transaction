@@ -1,9 +1,5 @@
 import { NetworkInfo } from "../../../standard/gateways/types/NetworkInfo.ts";
 import { TransactionStatus } from "../../../standard/gateways/types/TransactionStatus.ts";
-import {
-  QueryTransactionsArgs,
-  TransactionEdgeNode,
-} from "../../../standard/grahpql/types/Schema.ts";
 import { ArweaveGraphQlClient } from "./ArweaveGraphQlClient.ts";
 
 class GatewayTypeError extends TypeError {}
@@ -22,6 +18,12 @@ export class ArweaveGateway {
     }
 
     this.base_url = baseUrl;
+  }
+
+  get configs() {
+    return {
+      base_url: this.base_url,
+    };
   }
 
   /**
@@ -73,7 +75,7 @@ export class ArweaveGateway {
       );
     }
 
-    const query = fetch(this.base_url + "/tx/" + txId + "/status");
+    const query = fetch(this.base_url + "/tx/" + txId);
 
     return query
       .then(async (res) => {
