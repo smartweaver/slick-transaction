@@ -1,5 +1,5 @@
-import { QueryTransactionArgs } from "../../../../standard/grahpql/types/Schema.ts";
 import { QueryBuilderOptions } from "../types/QueryBuilderOptions.ts";
+import { QueryTransactionArgs } from "../types/Schema.ts";
 import { AbstractQueryBuilder } from "./AbstractQueryBuilder.ts";
 
 const GetTransactionOperation = `query GetTransaction(
@@ -11,12 +11,35 @@ const GetTransactionOperation = `query GetTransaction(
 }
 `;
 
+export const ReturnSchema = `
+    id
+    owner {
+      address
+    }
+    recipient
+    block {
+      timestamp
+      height
+      __typename
+    }
+    ingested_at
+    tags {
+      name
+      value
+      __typename
+    }
+`;
+
 export class TransactionQueryBuilder
   extends AbstractQueryBuilder<QueryTransactionArgs> {
-  protected query = GetTransactionOperation;
+  protected operation: string;
 
   constructor(options?: QueryBuilderOptions) {
     super(options);
+
+    this.operation = options.operation || GetTransactionOperation;
+
+    this.returnSchema(options.return_schema || ReturnSchema);
   }
 
   build() {
@@ -27,8 +50,8 @@ export class TransactionQueryBuilder
     };
   }
 
-  id(id: string) {
-    this.operation_variables.id = id;
+  id(value: QueryTransactionArgs["id"]) {
+    this.operation_variables.id = value;
     return this;
   }
 }

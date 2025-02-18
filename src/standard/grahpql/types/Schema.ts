@@ -27,7 +27,7 @@ export type Scalars = {
 
 export type Query = {
   __typename?: "Query";
-  transaction?: Maybe<Transaction>;
+  transaction?: Maybe<TransactionEdgeNode>;
   transactions: TransactionConnection;
   block?: Maybe<Block>;
   blocks: BlockConnection;
@@ -79,7 +79,7 @@ export type BlockFilter = {
 
 export type BlockConnection = {
   __typename?: "BlockConnection";
-  pageInfo: PageInfo;
+  pageInfo?: PageInfo;
   edges: Array<BlockEdge>;
 };
 
@@ -89,43 +89,40 @@ export type BlockEdge = {
   node: Block;
 };
 
-export type TransactionConnection = {
+export type TransactionConnection<
+  TxEdge extends TransactionEdge = TransactionEdge,
+> = {
   __typename?: "TransactionConnection";
   pageInfo: PageInfo;
-  edges: Array<TransactionEdge>;
+  edges: Array<TxEdge>;
 };
 
-export type TransactionEdge = {
+export type TransactionEdge<
+  TxNode extends TransactionEdgeNode = TransactionEdgeNode,
+> = {
   __typename?: "TransactionEdge";
-  cursor: Scalars["String"]["output"];
-  node: Transaction;
+  cursor?: Scalars["String"]["output"];
+  node: TxNode;
 };
 
 export type PageInfo = {
   __typename?: "PageInfo";
-  hasNextPage: Scalars["Boolean"]["output"];
+  hasNextPage?: Scalars["Boolean"]["output"];
 };
 
-export type Transaction = {
+export type TransactionEdgeNode = {
   __typename?: "Transaction";
-  id: Scalars["ID"]["output"];
-  anchor: Scalars["String"]["output"];
-  signature: Scalars["String"]["output"];
-  recipient: Scalars["String"]["output"];
-  owner: Owner;
-  fee: Amount;
-  quantity: Amount;
-  data: MetaData;
-  tags: Array<Tag>;
+  id?: Scalars["ID"]["output"];
+  anchor?: Scalars["String"]["output"];
   block?: Maybe<Block>;
-  /** @deprecated Use `bundledIn` */
-  parent?: Maybe<Parent>;
   bundledIn?: Maybe<Bundle>;
-};
-
-export type Parent = {
-  __typename?: "Parent";
-  id: Scalars["ID"]["output"];
+  data?: MetaData;
+  fee?: Amount;
+  owner?: Owner;
+  quantity?: Amount;
+  recipient?: Scalars["String"]["output"];
+  signature?: Scalars["String"]["output"];
+  tags?: Array<Tag>;
 };
 
 export type Bundle = {
@@ -135,34 +132,34 @@ export type Bundle = {
 
 export type Block = {
   __typename?: "Block";
-  id: Scalars["ID"]["output"];
-  timestamp: Scalars["Int"]["output"];
-  height: Scalars["Int"]["output"];
-  previous: Scalars["ID"]["output"];
+  id?: Scalars["ID"]["output"];
+  timestamp?: Scalars["Int"]["output"];
+  height?: Scalars["Int"]["output"];
+  previous?: Scalars["ID"]["output"];
 };
 
 export type MetaData = {
   __typename?: "MetaData";
-  size: Scalars["String"]["output"];
+  size?: Scalars["String"]["output"];
   type?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type Amount = {
   __typename?: "Amount";
-  winston: Scalars["String"]["output"];
-  ar: Scalars["String"]["output"];
+  winston?: Scalars["String"]["output"];
+  ar?: Scalars["String"]["output"];
 };
 
 export type Owner = {
   __typename?: "Owner";
-  address: Scalars["String"]["output"];
-  key: Scalars["String"]["output"];
+  address?: Scalars["String"]["output"];
+  key?: Scalars["String"]["output"];
 };
 
 export type Tag = {
   __typename?: "Tag";
-  name: Scalars["String"]["output"];
-  value: Scalars["String"]["output"];
+  name?: Scalars["String"]["output"];
+  value?: Scalars["String"]["output"];
 };
 
 export enum TagOperator {

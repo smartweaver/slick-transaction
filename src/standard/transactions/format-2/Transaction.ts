@@ -1,5 +1,5 @@
 import { TransactionBuilder } from "./TransactionBuilder.ts";
-import { TransactionFormat2 as Tx2 } from "./interfaces/TransactionFormat2.ts";
+import { ITransaction } from "./interfaces/ITransationFormat.ts";
 
 export class Transaction {
   /**
@@ -19,7 +19,7 @@ export class Transaction {
    * the transaction being built.
    */
   static from(
-    fields: Partial<Tx2 | { tags: Record<string, string> }>,
+    fields: Partial<ITransaction | { tags: Record<string, string> }>,
   ): TransactionBuilder {
     if (!fields) {
       fields = {};

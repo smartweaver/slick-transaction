@@ -6,11 +6,11 @@
     "moduleResolution": "NodeNext",
     "noEmit": true,
     "resolveJsonModule": true,
+    "strict": true,
     "target": "ES2017"
   },
   "include": [
-    "./scripts/**/*.ts",
-    "./src/**/*.ts"
+    "**/*.ts"
   ],
   "exclude": [
     "node_modules"

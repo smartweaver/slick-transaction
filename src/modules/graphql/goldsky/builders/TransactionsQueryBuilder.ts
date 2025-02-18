@@ -1,72 +1,49 @@
-import {
-  QueryTransactionsArgs,
-  SortOrder,
-} from "../../../../standard/grahpql/types/Schema.ts";
 import { QueryBuilderOptions } from "../types/QueryBuilderOptions.ts";
+import { QueryTransactionsArgs, SortOrder } from "../types/Schema.ts";
 import { AbstractQueryBuilder } from "./AbstractQueryBuilder.ts";
 
-const GetTransactionsOperations = `query GetTransactions(
-  $after: String
-  $block: BlockFilter
-  $bundledIn: [ID!]
-  $first: Int = 10
-  $ids: [ID!]
-  $owners: [String!]
-  $recipients: [String!]
-  $sort: SortOrder = HEIGHT_DESC
+export const GetTransactionsOperation = `query GetTransactions(
+  $after: String,
+  $block: RangeFilter,
+  $bundledIn: [ID!],
+  $first: Int = 25,
+  $ids: [ID!],
+  $owners: [String!],
+  $recipients: [String!],
+  $sortOrder: SortOrder = INGESTED_AT_DESC,
   $tags: [TagFilter!]
 ) {
   transactions(
     after: $after
-    block: $block
+    block: $block,
     bundledIn: $bundledIn
     first: $first
     ids: $ids
     owners: $owners
     recipients: $recipients
-    sort: $sort
+    sort: $sortOrder,
     tags: $tags
   ) {
     {{ return_schema }}
   }
 }`;
 
+export const ReturnSchema =
+  `pageInfo { hasNextPage } edges { cursor, node { id, owner, { address }, recipient, data { type, size }, block { height, timestamp }, quantity { ar, winston }, fee { ar, winston }, tags { name, value }, } } __typename } 
+`;
+
 export class TransactionsQueryBuilder
   extends AbstractQueryBuilder<QueryTransactionsArgs> {
-  query = GetTransactionsOperations;
+  protected operation: string;
 
   constructor(options?: QueryBuilderOptions) {
     super(options);
 
-    this.returnSchema(`
-      pageInfo {
-        hasNextPage
-      }
-      edges {
-        cursor
-        node {
-          id
-          owner {
-            address
-          }
-          recipient
-          quantity {
-            ar
-            winston
-          }
-          block {
-            timestamp
-            height
-          }
-          ingested_at
-          tags {
-            name
-            value
-          }
-        }
-      }
-`);
+    this.operation = options.operation || GetTransactionsOperation;
+
+    this.returnSchema(options.return_schema || ReturnSchema);
   }
+
   /**
    * @returns `this` instance for further method chaining.
    */
@@ -93,9 +70,15 @@ export class TransactionsQueryBuilder
   }
 
   build() {
+    if (this.operation_variables.after) {
+      this.return_schema = this.return_schema.replace(/count/g, "");
+    }
+
+    const query = this.buildQuery();
+
     return {
       operationName: `GetTransactions`,
-      query: this.buildQuery(),
+      query,
       variables: this.operation_variables,
     };
   }
@@ -173,8 +156,6 @@ export class TransactionsQueryBuilder
   }
 
   /**
-   * Set the tags to send with the query.
-   * @param tags The tags in question.
    * @returns `this` instance for further method chaining.
    */
   tags(value: QueryTransactionsArgs["tags"]) {
@@ -183,7 +164,6 @@ export class TransactionsQueryBuilder
     }
 
     this.operation_variables.tags = value;
-
     return this;
   }
 }

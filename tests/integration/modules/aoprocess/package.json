@@ -1,0 +1,9 @@
+{
+  "name": "integration-modules-aoprocess",
+  "version": "1.0.0",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "@drashland/rhum": "^2.2.0",
+    "@permaweb/aoconnect": "~0.x"
+  }
+}
