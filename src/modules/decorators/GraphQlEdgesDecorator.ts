@@ -24,10 +24,16 @@ class GraphQlEdgesDecorator<TxEdge extends TransactionEdge = TransactionEdge> {
    * have to be returned by this method.
    * @returns Transactions with the provided `minConfirmations`.
    */
-  async filterEdgesByConfirmations(
+  filterEdgesByConfirmations(
     networkHeight: number,
     minConfirmations: number,
-  ): Promise<GraphQlEdgesDecorator> {
+  ): GraphQlEdgesDecorator {
+    if (!networkHeight) {
+      throw new GraphQlEdgesDecoratorErrorTypeError(
+        "Argument `networkHeight: number` is required",
+      );
+    }
+
     if (!minConfirmations) {
       throw new GraphQlEdgesDecoratorErrorTypeError(
         "Argument `minConfirmations: number` is required",
@@ -37,7 +43,7 @@ class GraphQlEdgesDecorator<TxEdge extends TransactionEdge = TransactionEdge> {
     const filteredEdges = this.edges
       .map((edge) => decorateGraphQlEdge(edge))
       .filter((edge) => edge.hasBlockHeight())
-      .filter((edge) => edge.hasConfirmations(minConfirmations, networkHeight))
+      .filter((edge) => edge.hasConfirmations(networkHeight, minConfirmations))
       .map((edge) => edge.toTransactionEdge());
 
     return new GraphQlEdgesDecorator(filteredEdges);

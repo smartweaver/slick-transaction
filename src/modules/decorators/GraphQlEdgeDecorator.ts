@@ -22,7 +22,25 @@ class GraphQlEdge<TxEdge extends TransactionEdge = TransactionEdge> {
    * @returns `true` if yes, `false` if no.
    */
   hasBlockHeight() {
-    return typeof this.tx.block?.height === "number";
+    const height = this.tx.block?.height;
+
+    if (typeof height !== "number") {
+      return false;
+    }
+
+    if (height === Infinity) {
+      return false;
+    }
+
+    if (height < 0) {
+      return false;
+    }
+
+    if (isNaN(height)) {
+      return false;
+    }
+
+    return true;
   }
 
   /**
